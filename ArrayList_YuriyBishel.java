@@ -13,7 +13,7 @@ public class ArrayList_YuriyBishel<E> implements IntensiveList<E> {
 
     E[] array;
     int size;
-    boolean isSorted = false;
+    boolean isSorted;
 
     public ArrayList_YuriyBishel(E[] array) {
         this.array = array;
