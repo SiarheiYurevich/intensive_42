@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -160,10 +159,11 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
                 if (comparator.compare((E) array[i], pivot) > 0) {
                     Object o = array[i];
                     for (int j = i; j < mid; j++) {
-                        array[j] = array[j + 1];
+                        array[j] = array[j + 1]; //есть ли случаи выхода за границу?
                     }
                     array[mid] = o;
                     mid--;
+                    i--;
                 }
             }
 
@@ -171,9 +171,9 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
                 if (comparator.compare((E) array[i], pivot) <= 0) {
                     Object o = array[i];
                     for (int j = i; j > mid; j--) {
-                        array[j] = array[j - 1];
+                        array[j] = array[j - 1]; //есть ли случаи выхода за границу?
                     }
-                    array[i] = o;
+                    array[mid] = o;
                     mid++;
                 }
             }
@@ -221,9 +221,7 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
     public String toString() {
         Object[] newArray = new Object[size];
         System.arraycopy(array, 0, newArray, 0, size);
-        return "ArrayList_LevDurov{" +
-                "array=" + Arrays.toString(newArray) +
-                ", size=" + size +
-                '}';
+        return "array=" + Arrays.toString(newArray) +
+                ", size=" + size;
     }
 }
