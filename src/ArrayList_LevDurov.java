@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 /**
  * Реализация собственного динамического списка (аналог ArrayList, не потокобезопасный).
+ *
  * @param <E> Тип элементов списка.
  * @author Лев Дуров
  * @see IntensiveList
@@ -33,6 +34,7 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
 
     /**
      * Создает пустой список с указанной емкостью.
+     *
      * @param capacity Емкость списка.
      */
     public ArrayList_LevDurov(int capacity) {
@@ -50,6 +52,7 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
 
     /**
      * Добавляет элемент в конец списка.
+     *
      * @param element Элемент для добавления в список.
      */
     @Override
@@ -75,7 +78,8 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
 
     /**
      * Добавляет элемент в список на определенную позицию.
-     * @param index Индекс для вставки элемента.
+     *
+     * @param index   Индекс для вставки элемента.
      * @param element Элемент для добавления в список.
      */
     @Override
@@ -89,6 +93,7 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
 
     /**
      * Возвращает элемент списка с заданным индексом.
+     *
      * @param index Индекс элемента.
      * @return Элемент списка.
      */
@@ -99,7 +104,8 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
 
     /**
      * Устанавливает значение элементу списка с заданным индексом.
-     * @param index Индекс списка.
+     *
+     * @param index   Индекс списка.
      * @param element Новый элемент для вставки.
      * @return Возвращает старое значение ячейки.
      */
@@ -132,15 +138,17 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
     @Override
     public void clear() {
         array = new Object[DEFAULT_CAPACITY];
+        size = 0;
     }
 
     /**
      * Сортирует список по возрастанию элементов, используя алгоритм быстрой сортировки.
+     *
      * @param comparator Содержит функцию сравнения элементов коллекции.
      */
     @Override
     public void quickSort(Comparator<E> comparator) {
-        quickSortRecurs(comparator, 0, array.length - 1);
+        quickSortRecurs(comparator, 0, size - 1);
     }
 
     private void quickSortRecurs(Comparator<E> comparator, int begin, int end) { // 2 3 4 1 6 5 7 -
@@ -177,14 +185,20 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
 
     /**
      * Проверяет, отсортирован ли список.
+     *
      * @return Если список отсортирован по возрастанию возвращает true, иначе - false.
      */
     @Override
-    public boolean isSorted() {
+    public boolean isSorted(Comparator<E> comparator) {
         if (size < 2)
             return true;
 
-        return false;
+        for (int i = 0; i < size - 1; i++) {
+            if (comparator.compare((E) array[i], (E) array[i + 1]) > 0)
+                return false;
+        }
+
+        return true;
     }
 
     /**
@@ -205,8 +219,10 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
 
     @Override
     public String toString() {
+        Object[] newArray = new Object[size];
+        System.arraycopy(array, 0, newArray, 0, size);
         return "ArrayList_LevDurov{" +
-                "array=" + Arrays.toString(array) +
+                "array=" + Arrays.toString(newArray) +
                 ", size=" + size +
                 '}';
     }
