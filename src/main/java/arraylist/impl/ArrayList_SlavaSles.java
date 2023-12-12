@@ -119,6 +119,7 @@ public class ArrayList_SlavaSles<E> implements IntensiveList<E> {
         checkIndex(index);
         E previousValue = array[index];
         array[index] = element;
+        isSorted = false;
         return previousValue;
     }
 
