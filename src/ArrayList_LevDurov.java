@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -150,7 +151,7 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
         quickSortRecurs(comparator, 0, size - 1);
     }
 
-    private void quickSortRecurs(Comparator<E> comparator, int begin, int end) { // 2 3 4 1 6 5 7 -
+    private void quickSortRecurs(Comparator<E> comparator, int begin, int end) {
         if (begin < end) {
             int mid = (end - begin) / 2 + begin;
             E pivot = (E) array[mid];
