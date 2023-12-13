@@ -1,3 +1,5 @@
+package arrayList;
+
 import java.util.Comparator;
 
 public interface IntensiveList<E> {
