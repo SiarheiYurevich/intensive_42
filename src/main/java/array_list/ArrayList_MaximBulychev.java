@@ -1,5 +1,6 @@
 package src.main.java.array_list;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -223,6 +224,43 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
+     * Проверяет данный список на эквивалентность переданному. Возвращает {@code true} только в том случае,
+     * если класс переданного объекта тоже является реализацией инерфейса {@code IntensiveList},
+     * оба списка имеют одинаковый размер и все элементы в них попарно эквивалентны друг другу.
+     *
+     * @param o объект, с которым необходимо сравнить данный список.
+     * @return {@code true}, если списки эквивалентны, иначе {@code false}.
+     */
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null)
+            return false;
+        if (o instanceof IntensiveList<?> that) {
+            if (size != that.size())
+                return false;
+            for (int i = 0; i < size; i++) {
+                if (!Objects.equals(this.get(i), that.get(i)))
+                    return false;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Возвращает значение хэш-кода данного списка. Значение зависит от размера списка
+     * и значения хэш-кода каждого хранящегося в нём элемента.
+     * @return значение хэш-кода данного списка.
+     */
+    public int hashCode() {
+        int result = Objects.hash(size);
+        result = 31 * result + Arrays.hashCode(array);
+        return result;
+    }
+
+    /**
      * Проверяет указанный индекс на вхождение в диапазон массива.
      *
      * @param index проверяемый индекс
@@ -284,7 +322,7 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
         E pivot = getPivotAndSwap(comparator, left, middle, right);
         int divPoint = partition(comparator, left, right, pivot);
         quickSortRecursive(comparator, left, divPoint - 1);
-        quickSortRecursive(comparator, divPoint, right);
+        quickSortRecursive(comparator, divPoint + 1, right);
     }
 
     /**
@@ -315,15 +353,17 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
      */
     private int partition(Comparator<E> comparator, int left, int right, E pivot) {
         int leftPoint = left;
-        int rightPoint = right;
+        int rightPoint = right - 1;
         while (true) {
-            while (leftPoint <= right && comparator.compare(array[leftPoint], pivot) < 0) leftPoint++;
-            while (rightPoint >= left && comparator.compare(array[rightPoint], pivot) >= 0) rightPoint--;
-            if (leftPoint < rightPoint)
-                swap(leftPoint, rightPoint);
-            else
+            while (comparator.compare(array[++leftPoint], pivot) < 0);
+            while (comparator.compare(array[--rightPoint], pivot) > 0);
+            if (rightPoint <= leftPoint) {
                 break;
+            } else {
+                swap(leftPoint, rightPoint);
+            }
         }
+        swap(leftPoint, right - 1);
         return leftPoint;
     }
 
@@ -331,8 +371,8 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
      * Выбирает опорный элемент.
      * Берутся 3 элемента подмассива: с минимальным, максимальным и средним индексом.
      * Элементы меняются местами таким образом, чтобы находиться в порядке возрастания
-     * по правилам переданного компаратора, после чего возвращается элемент, находящийся
-     * на средней позиции (он же имеет среднее значение).
+     * по правилам переданного компаратора, после чего элемент, находящийся на средней позиции
+     * перемещается на позицию левее правого и возвращается (данный элемент имеет среднее значение).
      *
      * @param comparator переданный компаратор.
      * @param left       минимальный индекс подмассива.
@@ -350,7 +390,8 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
         if (comparator.compare(array[middle], array[right]) > 0) {
             swap(middle, right);
         }
-        return array[middle];
+        swap(middle, right - 1);
+        return array[right - 1];
     }
 
     /**
