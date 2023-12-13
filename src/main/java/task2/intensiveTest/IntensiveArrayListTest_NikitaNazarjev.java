@@ -22,6 +22,7 @@ public class IntensiveArrayListTest_NikitaNazarjev {
         Assertions_NikitaNazarjev.assertNotEquals(first,second);
     }
 
+
     @IntensiveTest_NikitaNazarjev
     public static void test_sorted_arrayList_NikitaNazarjevTest(){
         ArrayList_NikitaNazarjev<Integer> lst = new ArrayList_NikitaNazarjev<>();

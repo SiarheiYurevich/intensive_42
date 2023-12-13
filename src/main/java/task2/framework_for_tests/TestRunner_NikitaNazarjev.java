@@ -18,6 +18,7 @@ import java.util.List;
  * The run method will recursively go through the packages, find all the
  * annotations and run the tests.
  */
+
 public class TestRunner_NikitaNazarjev {
 
     private static final String ANSI_GREEN = "\u001B[32m";

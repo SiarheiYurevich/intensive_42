@@ -7,7 +7,8 @@ import java.lang.annotation.Target;
 
 /**
  *With this annotation, you can mark static methods
- * that need to be tested using the framework_for_tests.TestRunner_NikitaNazarjev class
+ * that need to be tested using the framework_for_tests.
+ * TestRunner_NikitaNazarjev class
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

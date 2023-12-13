@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         List<String> packages = new ArrayList<>();
         packages.add("intensiveTest");
+
         TestRunner_NikitaNazarjev.run(packages);
     }
 }

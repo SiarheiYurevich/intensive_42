@@ -10,7 +10,7 @@ public class Assertions_NikitaNazarjev {
 
 
     /**
-     * Checks that the expected parameter is indeed true
+     * Check that the expected parameter is indeed true
      * @param expected
      * @throws TestFailedException error in case of non-compliance
      */
