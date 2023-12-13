@@ -1,6 +1,8 @@
+package task1;
+
 import java.util.Comparator;
 
-interface IntensiveList<E> {
+public interface IntensiveList<E> {
     int size();
 
     void add(E element);
