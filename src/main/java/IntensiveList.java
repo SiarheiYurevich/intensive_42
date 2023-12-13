@@ -1,4 +1,4 @@
-package src.java;
+package src.main.java;
 
 import java.util.Comparator;
 
@@ -11,6 +11,6 @@ public interface IntensiveList<E> {
     E remove(int index);
     void clear();//удаляем все элементы, capacity приводим к дефолтному
     void quickSort(Comparator<E> comparator);//реализуем быструю сортировку, дефолт по возрастанию
-    boolean isSorted();
+    boolean isSorted(Comparator<E> comparator);
     void split(int size);//обрезаем список до указанного размера
 }

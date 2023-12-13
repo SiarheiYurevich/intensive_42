@@ -1,4 +1,4 @@
-package src.java;
+package src.main.java;
 
 
 import java.util.Comparator;
@@ -52,7 +52,7 @@ public class ArrayList_TatyanaSh<E> implements IntensiveList<E> {
     public void add(E element) {
 
         if (size == array.length) {
-          array =  grow();
+            array = grow();
         }
         array[size] = element;
         size++;
@@ -78,7 +78,7 @@ public class ArrayList_TatyanaSh<E> implements IntensiveList<E> {
     @Override
     public void add(int index, E element) {
         if (size == array.length) {
-           array =  grow();
+            array = grow();
         }
         checkIndex(size, index);
         System.arraycopy(array, index, array, index + 1, size - index);
@@ -155,12 +155,13 @@ public class ArrayList_TatyanaSh<E> implements IntensiveList<E> {
         for (int i = 0; i < size; i++) {
             array[i] = null;
         }
-        array = (E[])new Object[DEFAULT_CAPACITY];
+        array = (E[]) new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
     /**
      * Реализует быструю сортировку списка, дефолт по возрастанию.
+     *
      * @param comparator - компоратор, на основе которого осуществляется сортировка
      */
     @Override
@@ -201,12 +202,26 @@ public class ArrayList_TatyanaSh<E> implements IntensiveList<E> {
 
 
     @Override
-    public boolean isSorted() {
+    public boolean isSorted(Comparator<E> comparator) {
+        int i = 0;
+        while (true) {
+            if (i + 1 < size) {
+                if (comparator.compare(array[i], array[i + 1]) <= 0) {
+                    i++;
+                    continue;
+                } else {
+                    isSorted = false;
+                    break;
+                }
+            }
+            break;
+        }
         return isSorted;
     }
 
     /**
      * Обрезает список до указанного размера
+     *
      * @param size - требуемый размер списка
      */
     @Override

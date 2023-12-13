@@ -1,4 +1,4 @@
-package src.java;
+package src.main.java;
 
 
 import java.util.Comparator;
@@ -35,7 +35,14 @@ public class Main {
             }
         });
         list.print();
-        System.out.println(list.isSorted());
+        list.add(4);
+        System.out.println(list.isSorted(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        }));
+
         list.split(6);
         list.print();
         list.clear();
