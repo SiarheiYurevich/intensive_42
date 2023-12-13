@@ -132,6 +132,9 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
      */
     @Override
     public void clear() {
+        for (int i = 0; i < size; i++) {
+            array[i] = null;
+        }
         array = (E[]) new Object[DEFAULT_CAPACITY];
         size = INITIAL_SIZE;
     }
