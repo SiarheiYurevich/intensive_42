@@ -1,4 +1,4 @@
-package com.aston;
+package com.aston.task1;
 
 import java.util.Comparator;
 
@@ -207,5 +207,19 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
         }
         this.size = size;
         array = (E[]) reduceArray;
+    }
+
+    /**
+     * The method use for string display of list data
+     *
+     * @return string display of list data
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (E e : array) {
+            sb.append(e.toString()).append(", ");
+        }
+        return sb.toString();
     }
 }

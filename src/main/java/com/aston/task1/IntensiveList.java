@@ -1,4 +1,4 @@
-package com.aston;
+package com.aston.task1;
 
 import java.util.Comparator;
 
