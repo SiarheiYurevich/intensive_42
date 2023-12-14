@@ -1,72 +1,29 @@
-import arraylist.impl.ArrayList_SlavaSles;
-import arraylist.IntensiveList;
+import task_1.impl.ArrayList_SlavaSles;
+import task_1.IntensiveList;
+import task_2.Assertions_SlavaSles;
+import task_2.TestRunner_SlavaSles;
 
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-//        ArrayList<Integer> arrayList = new ArrayList<>();
-//        arrayList.add(12);
-//        arrayList.add(1);
-//        arrayList.add(3);
-//        arrayList.add(3, 10);
-//        arrayList.add(2, 88);
-//        arrayList.forEach(System.out::println);
-//        System.out.println();
-//        System.out.println(arrayList.get(4));
-//        System.out.println(arrayList.set(1, 11));
-//        System.out.println();
-//        System.out.println(arrayList.remove(3));
-//        System.out.println();
-//        arrayList.forEach(System.out::println);
+        IntensiveList<String> expected = new ArrayList_SlavaSles<>();
+        expected.add("1");
+        expected.add("35");
+        IntensiveList<String> actual = new ArrayList_SlavaSles<>();
+        actual.add("1");
+        actual.add("3" + "5");
+        Assertions_SlavaSles.assertEqualsLists(expected, actual);
+        System.out.println();
+        Assertions_SlavaSles.assertEquals(5, 15 / 3);
+        Assertions_SlavaSles.assertEquals("53", "5" + "3");
+        Assertions_SlavaSles.assertNotEquals(5, 15 / 5);
 
-        IntensiveList<Integer> arrayListSlavaSles = new ArrayList_SlavaSles<>();
-        System.out.println(arrayListSlavaSles.size());
-        arrayListSlavaSles.add(5);
-        System.out.println(arrayListSlavaSles.get(0));
-        arrayListSlavaSles.add(1, 3);
-        System.out.println(arrayListSlavaSles.get(1));
-        arrayListSlavaSles.add(2, 19);
-        System.out.println(arrayListSlavaSles.get(2));
-        arrayListSlavaSles.add(1, 48);
-        System.out.println();
-        for (int i = 0; i < arrayListSlavaSles.size(); i++) {
-            System.out.println(arrayListSlavaSles.get(i));
-        }
-        System.out.println();
-        System.out.println(arrayListSlavaSles.set(2, 55));
-        System.out.println();
-        System.out.println(arrayListSlavaSles.remove(0));
-        System.out.println();
-        for (int i = 0; i < arrayListSlavaSles.size(); i++) {
-            System.out.println(arrayListSlavaSles.get(i));
-        }
-        System.out.println();
-        for (int i = 0; i < 8; i++) {
-            arrayListSlavaSles.add(i);
-        }
-        System.out.println();
-        for (int i = 0; i < arrayListSlavaSles.size(); i++) {
-            System.out.println(arrayListSlavaSles.get(i));
-        }
-        System.out.println(arrayListSlavaSles.isSorted());
-        arrayListSlavaSles.split(8);
-        arrayListSlavaSles.quickSort(Comparator.comparing(Integer::valueOf));
-        System.out.println(arrayListSlavaSles.isSorted());
-        for (int i = 0; i < arrayListSlavaSles.size(); i++) {
-            System.out.println(arrayListSlavaSles.get(i));
-        }
-        arrayListSlavaSles.add(5, 100);
-        arrayListSlavaSles.add(9, 2);
-        System.out.println(arrayListSlavaSles.isSorted());
-        arrayListSlavaSles.quickSort(Comparator.comparing(Integer::valueOf));
-        System.out.println(arrayListSlavaSles.isSorted());
-        for (int i = 0; i < arrayListSlavaSles.size(); i++) {
-            System.out.println(arrayListSlavaSles.get(i));
-        }
-        arrayListSlavaSles.clear();
-        System.out.println(arrayListSlavaSles.size());
-        arrayListSlavaSles = new ArrayList_SlavaSles<>(8);
-        System.out.println(arrayListSlavaSles.size());
+        TestRunner_SlavaSles testRunner = new TestRunner_SlavaSles();
+        List<String> packages = new ArrayList<>();
+        packages.add("test");
+        packages.add("arraylist.impl");
+        packages.forEach(testRunner::run);
     }
 }

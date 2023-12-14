@@ -1,6 +1,6 @@
-package arraylist.impl;
+package task_1.impl;
 
-import arraylist.IntensiveList;
+import task_1.IntensiveList;
 
 import java.util.Arrays;
 import java.util.Comparator;

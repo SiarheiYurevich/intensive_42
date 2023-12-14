@@ -1,4 +1,4 @@
-package arraylist;
+package task_1;
 
 import java.util.Comparator;
 
