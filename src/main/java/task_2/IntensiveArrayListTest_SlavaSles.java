@@ -5,20 +5,29 @@ import task_1.impl.ArrayList_SlavaSles;
 
 import java.util.Comparator;
 
+/**
+ * Класс, в котором содержатся тесты, помеченные аннотацией {@link IntensiveTest_SlavaSles}
+ */
 public class IntensiveArrayListTest_SlavaSles {
 
     public IntensiveArrayListTest_SlavaSles() {
     }
 
+    /**
+     * Метод, проверяющий сортировку списка целых чисел
+     */
     @IntensiveTest_SlavaSles
     public void testInteger() {
         IntensiveList<Integer> arrayList = new ArrayList_SlavaSles<>();
         arrayList.add(5);
-        arrayList.add(9);
+        arrayList.add(15);
         arrayList.add(11);
         checkListIsSorted(arrayList, Comparator.comparing(Integer::valueOf));
     }
 
+    /**
+     * Метод, проверяющий сортировку списка строк
+     */
     @IntensiveTest_SlavaSles
     public void testString() {
         IntensiveList<String> arrayList = new ArrayList_SlavaSles<>();

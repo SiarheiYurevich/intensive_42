@@ -2,7 +2,19 @@ package task_2;
 
 import task_1.IntensiveList;
 
+//    Метод проверки сортировки списков нужно реализовывать здесь?
+//    В методы проверки равенства нужно передавать Comparator?
+
+/**
+ * Статический класс, в котором реализованы проверки утверждений (assertions) о равенстве/неравенстве объектов
+ */
 public class Assertions_SlavaSles {
+
+    /**
+     * Метод, проверяющий равенство списков IntensiveList между собой
+     * @param expected ожидаемый список
+     * @param actual проверяемый список
+     */
     public static void assertEqualsLists(IntensiveList<?> expected, IntensiveList<?> actual) {
         if (checkListEquals(expected, actual)) {
             System.out.println("Списки IntensiveList равны.");
@@ -13,6 +25,11 @@ public class Assertions_SlavaSles {
         }
     }
 
+    /**
+     * Метод, проверяющий, списки IntensiveList и аргументо, не равны между собой
+     * @param expected ожидаемый список
+     * @param actual проверяемый список
+     */
     public static void assertNotEqualsLists(IntensiveList<?> expected, IntensiveList<?> actual) {
         if (!checkListEquals(expected, actual)) {
             System.out.println("Списки IntensiveList не равны.");
@@ -63,6 +80,11 @@ public class Assertions_SlavaSles {
         }
     }
 
+    /**
+     * Метод, сравнивающий объекты между собой
+     * @param expected ожидаемый объект
+     * @param actual проверяемый объект
+     */
     public static void assertEquals(Object expected, Object actual) {
         if (checkObjectEquals(expected, actual)) {
             System.out.println("Ссылки на объекты совпадают или объекты равны.");
@@ -71,6 +93,11 @@ public class Assertions_SlavaSles {
         }
     }
 
+    /**
+     * Метод проверяющий, что объекты не равны между собой
+     * @param expected ожидаемый объект
+     * @param actual проверяемый объект
+     */
     public static void assertNotEquals(Object expected, Object actual) {
         if (!checkObjectEquals(expected, actual)) {
             System.out.println("Объекты не равны или ссылки на объекты не совпадают.");

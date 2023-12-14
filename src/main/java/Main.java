@@ -22,8 +22,8 @@ public class Main {
 
         TestRunner_SlavaSles testRunner = new TestRunner_SlavaSles();
         List<String> packages = new ArrayList<>();
-        packages.add("test");
-        packages.add("arraylist.impl");
+        packages.add("task_2");
+        packages.add("task_1.impl");
         packages.forEach(testRunner::run);
     }
 }

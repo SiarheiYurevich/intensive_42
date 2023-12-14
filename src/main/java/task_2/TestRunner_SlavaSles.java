@@ -8,8 +8,16 @@ import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Класс, сканирующий пакет на наличие в нем классов с методами, аннотированными
+ * {@link IntensiveTest_SlavaSles}, для их последующего запуска
+ */
 public class TestRunner_SlavaSles {
 
+    /**
+     * Метод, выполняющий сканирование пакета и запуск тестов с аннотацией {@link IntensiveTest_SlavaSles}
+     * @param packageName название пакета для сканирования
+     */
     public void run(String packageName) {
         Set<Class> classes = findAllClassesUsingClassLoader(packageName);
         for (Class clazz : classes) {
