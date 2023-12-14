@@ -90,9 +90,9 @@ public class TestRunner_LevDurov {
                 classes.addAll(findClasses(file, packegeName + "." + fileName));
             } else if (fileName.endsWith(".class")) {
                 try {
-                    classes.add(Class.forName((packegeName
-                            + "."
-                            + fileName.substring(0, fileName.length() - 6)).substring(1)));
+                    String className = packegeName + "." + fileName.substring(0, fileName.length() - 6);
+                    className = className.startsWith(".")? className.substring(1) : className;
+                    classes.add(Class.forName(className));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
