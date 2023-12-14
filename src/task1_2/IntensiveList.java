@@ -1,3 +1,5 @@
+package task1_2;
+
 import java.util.Comparator;
 
 public interface IntensiveList<E> {

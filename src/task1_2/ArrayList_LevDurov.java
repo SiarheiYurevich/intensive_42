@@ -1,6 +1,8 @@
-import javax.swing.*;
+package task1_2;
+
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 
 /**
  * Реализация собственного динамического списка (аналог ArrayList, не потокобезопасный).
@@ -153,36 +155,34 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
 
     private void quickSortRecurs(Comparator<E> comparator, int begin, int end) {
         if (begin < end) {
-            int mid = (end - begin) / 2 + begin;
-            E pivot = (E) array[mid];
+            int partitionIndex = partition(comparator, begin, end);
 
-            for (int i = begin; i < mid; i++) {
-                if (comparator.compare((E) array[i], pivot) > 0) {
-                    Object o = array[i];
-                    for (int j = i; j < mid; j++) {
-                        array[j] = array[j + 1]; //есть ли случаи выхода за границу?
-                    }
-                    array[mid] = o;
-                    mid--;
-                    i--;
-                }
-            }
-
-            for (int i = (end - begin) / 2 + begin + 1; i <= end; i++) {
-                if (comparator.compare((E) array[i], pivot) <= 0) {
-                    Object o = array[i];
-                    for (int j = i; j > mid; j--) {
-                        array[j] = array[j - 1]; //есть ли случаи выхода за границу?
-                    }
-                    array[mid] = o;
-                    mid++;
-                }
-            }
-
-            quickSortRecurs(comparator, begin, mid - 1);
-            quickSortRecurs(comparator, mid + 1, end);
+            quickSortRecurs(comparator, begin, partitionIndex-1);
+            quickSortRecurs(comparator, partitionIndex+1, end);
         }
     }
+
+    private int partition(Comparator<E> comparator, int begin, int end) {
+        Object pivot = array[end];
+        int i = (begin-1);
+
+        for (int j = begin; j < end; j++) {
+            if (comparator.compare((E) pivot, (E) array[j]) >= 0) {
+                i++;
+
+                Object swapTemp = array[i];
+                array[i] = array[j];
+                array[j] = swapTemp;
+            }
+        }
+
+        Object swapTemp = array[i+1];
+        array[i+1] = array[end];
+        array[end] = swapTemp;
+
+        return i+1;
+    }
+
 
     /**
      * Проверяет, отсортирован ли список.
@@ -224,5 +224,20 @@ public class ArrayList_LevDurov<E> implements IntensiveList<E> {
         System.arraycopy(array, 0, newArray, 0, size);
         return "array=" + Arrays.toString(newArray) +
                 ", size=" + size;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArrayList_LevDurov<?> that = (ArrayList_LevDurov<?>) o;
+        return Arrays.equals(array, that.array);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(size);
+        result = 31 * result + Arrays.hashCode(array);
+        return result;
     }
 }

@@ -1,28 +1,14 @@
+import task2.TestRunner_LevDurov;
+
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        IntensiveList<Integer> intList = new ArrayList_LevDurov<>();
-        intList.add(1);
-        intList.add(3);
-        intList.add(2);
-        intList.add(4);
-        intList.add(5);
-        intList.add(3);
-        intList.add(-2);
-        intList.add(-4);
+        List<String> packages = new ArrayList<>();
+        packages.add(Main.class.getPackageName());
 
-        System.out.println(intList.toString() + " отсортирован? " + intList.isSorted(Comparator.comparingInt(x -> x)));
-        System.out.println("Быстрая сортировка");
-        intList.quickSort(Comparator.comparingInt(x -> x));
-        System.out.println(intList.toString() + " отсортирован? " + intList.isSorted(Comparator.comparingInt(x -> x)));
-        intList.clear();
-        intList.add(1);
-        intList.add(2);
-        intList.add(3);
-        System.out.println(intList.toString() + " отсортирован? " + intList.isSorted(Comparator.comparingInt(x -> x)));
-
-        System.out.println(intList.toString());
+        TestRunner_LevDurov testRunner = new TestRunner_LevDurov(packages);
+        testRunner.run();
     }
 }
