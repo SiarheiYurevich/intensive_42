@@ -22,10 +22,18 @@ public class Assertions_VitaliBoshko {
      * @return true if the specified lists is equal
      */
     public static <E> boolean assertEquals(IntensiveList<E> list1, IntensiveList<E> list2) {
-        if (list1 == list2) return true;
-        if (list1.size() != list2.size()) return false;
+        if (list1 == list2) {
+            return true;
+        }
+
+        if (list1.size() != list2.size()) {
+            return false;
+        }
+
         for (int i = 0; i < list1.size(); i++) {
-            if (!list1.get(i).equals(list2.get(i))) return false;
+            if (!list1.get(i).equals(list2.get(i))) {
+                return false;
+            }
         }
         return true;
     }

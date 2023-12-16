@@ -44,6 +44,7 @@ public class IntensiveArrayListTest_VitaliBoshko {
         for (int i = 0; i < 25; i++) {
             intensiveList.add(random.nextInt(100));
         }
+
         intensiveList.quickSort(Integer::compareTo);
         System.out.println(intensiveList);
 

@@ -67,11 +67,13 @@ public class TestRunner_VitaliBoshko {
         assert classLoader != null;
         String path = packageName.replace('.', '/');
         Enumeration<URL> resources = classLoader.getResources(path);
+
         List<File> dirs = new ArrayList<>();
         while (resources.hasMoreElements()) {
             URL resource = (URL) resources.nextElement();
             dirs.add(new File(resource.getFile()));
         }
+
         List<Class<?>> classes = new ArrayList<>();
         for (File directory : dirs) {
             classes.addAll(findClasses(directory, packageName));
@@ -84,6 +86,7 @@ public class TestRunner_VitaliBoshko {
         if (!directory.exists()) {
             return classes;
         }
+
         File[] files = directory.listFiles();
         assert files != null;
         for (File file : files) {

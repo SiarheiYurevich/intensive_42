@@ -14,6 +14,7 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
     private final int DEFAULT_CAPACITY = 10;
     private final int INITIAL_SIZE = 0;
     private int size = INITIAL_SIZE;
+    private final double ARRAY_LENGTH_INCREASE_FACTOR = 1.5;
 
     /**
      * Creates the empty list with default capacity
@@ -49,9 +50,11 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
     @Override
     public boolean add(E element) {
         if (array.length == size) {
-            resize(size * 3 / 2 + 1);
+            resize((int) (size * ARRAY_LENGTH_INCREASE_FACTOR));
         }
-        array[size++] = element;
+
+        array[size] = element;
+        size++;
         return true;
     }
 
@@ -60,6 +63,7 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
         for (int i = 0; i < size; i++) {
             newArray[i] = array[i];
         }
+
         array = (E[]) newArray;
     }
 
@@ -71,13 +75,18 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
      */
     @Override
     public void add(int index, E element) {
-        if (index < 0 || index > size) throw new IndexOutOfBoundsException();
-        if (array.length == size) {
-            resize(size * 3 / 2 + 1);
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index -" + index + ", is not in range");
         }
+
+        if (array.length == size) {
+            resize((int) (size * ARRAY_LENGTH_INCREASE_FACTOR));
+        }
+
         for (int i = size - 1; i >= index; i--) {
             array[i + 1] = array[i];
         }
+
         array[index] = element;
         size++;
     }
@@ -90,7 +99,9 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
      */
     @Override
     public E get(int index) {
-        if (index < 0 || index > size - 1) throw new IndexOutOfBoundsException();
+        if (index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException("Index -" + index + ", is not in range");
+        }
         return array[index];
     }
 
@@ -103,9 +114,13 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
      */
     @Override
     public E set(int index, E element) {
-        if (index < 0 || index > size - 1) throw new IndexOutOfBoundsException();
+        if (index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException("Index -" + index + ", is not in range");
+        }
+
         E oldElement = array[index];
         array[index] = element;
+
         return oldElement;
     }
 
@@ -118,12 +133,18 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
      */
     @Override
     public E remove(int index) {
-        if (index < 0 || index > size - 1) throw new IndexOutOfBoundsException();
+        if (index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException("Index -" + index + ", is not in range");
+        }
+
         E removeElement = array[index];
         for (int i = index; i < size - 1; i++) {
             array[index] = array[index + 1];
         }
-        array[--size] = null;
+
+        size--;
+        array[size] = null;
+
         return removeElement;
     }
 
@@ -150,10 +171,10 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
     }
 
     private void recursionQuickSort(int left, int right, Comparator<E> comparator) {
-        if ((right - left) <= 0) return;
-        else {
+        if ((right - left) > 0) {
             E supportElement = array[right];
             int supportElementPosition = detPosition(left, right, supportElement, comparator);
+
             recursionQuickSort(left, supportElementPosition - 1, comparator);
             recursionQuickSort(supportElementPosition + 1, right, comparator);
         }
@@ -166,15 +187,17 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
         while (true) {
             while (comparator.compare(array[++leftPos], supportElement) < 0) ;
             while (rightPos > 0 && comparator.compare(array[--rightPos], supportElement) > 0) ;
+
             if (leftPos >= rightPos) break;
             else exchange(leftPos, rightPos);
         }
         exchange(leftPos, rightBorderPos);
+
         return leftPos;
     }
 
     private void exchange(int i, int j) {
-        E temp = (E) array[i];
+        E temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
@@ -188,7 +211,9 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
     @Override
     public boolean isSorted(Comparator<E> comparator) {
         for (int i = 0; i < size - 1; i++) {
-            if (comparator.compare(array[i], array[i + 1]) > 0) return false;
+            if (comparator.compare(array[i], array[i + 1]) > 0) {
+                return false;
+            }
         }
         return true;
     }
@@ -200,11 +225,15 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
      */
     @Override
     public void split(int size) {
-        if (size < 0 || size > this.size) throw new IndexOutOfBoundsException();
+        if (size < 0 || size > this.size){
+            throw new IndexOutOfBoundsException("Size -" + size + ", cannot be applied");
+        }
+
         Object[] reduceArray = new Object[size];
         for (int i = 0; i < size; i++) {
             reduceArray[i] = array[i];
         }
+
         this.size = size;
         array = (E[]) reduceArray;
     }
@@ -216,10 +245,10 @@ public class ArrayList_VitaliBoshko<E> implements IntensiveList<E> {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         for (E e : array) {
-            sb.append(e.toString()).append(", ");
+            stringBuilder.append(e.toString()).append(", ");
         }
-        return sb.toString();
+        return stringBuilder.toString();
     }
 }
