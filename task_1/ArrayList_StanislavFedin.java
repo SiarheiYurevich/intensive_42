@@ -4,34 +4,33 @@ import java.util.Comparator;
 
 /**
  * Реализация task_1.IntensiveList<E> идейно похожая на ArrayList<E>
- * @param <E> - тип элементов хранящихся в массиве
+ * @param <E> тип элементов хранящихся в массиве
  * @author Stanislav Fedin
  */
 public class ArrayList_StanislavFedin<E> implements IntensiveList<E>{
 
     private static final int DEFAULT_CAPACITY = 10;
-    private Object[] arr;
-    private int arrSize = 0;
-
-    private boolean isSorted = false;
+    private Object[] array;
+    private int arraySize = 0;
 
     /**
      * Создает пустой task_1.ArrayList_StanislavFedin
      * с вместимостью по умолчанию(10).
      */
     public ArrayList_StanislavFedin () {
-        this.arr = new Object[DEFAULT_CAPACITY];
+        this.array = new Object[DEFAULT_CAPACITY];
     }
 
     /**
      * Создает пустой task_1.ArrayList_StanislavFedin
      * с указанной в качестве аргумента вместимостью.
-     * @param initialCapacity - вместимость массива
-     * @throws IllegalArgumentException - если вместимость меньше 1.
+     * @param initialCapacity вместимость массива
+     * @throws IllegalArgumentException если вместимость меньше 1
      */
     public ArrayList_StanislavFedin (int initialCapacity) {
-        if (initialCapacity < 1) throw new IllegalArgumentException("Initial capacity cannot be less than 1");
-        else this.arr = new Object[initialCapacity];
+        if (initialCapacity < 1)
+            throw new IllegalArgumentException("Initial capacity cannot be less than 1, got: " + initialCapacity);
+        else this.array = new Object[initialCapacity];
     }
 
     /**
@@ -40,68 +39,70 @@ public class ArrayList_StanislavFedin<E> implements IntensiveList<E>{
      */
     @Override
     public int size() {
-        return this.arrSize;
+        return this.arraySize;
     }
 
     /**
      *
-     * @param element Добавляет элемент в конец массива.
+     * @param element Добавляет элемент в конец массива
      */
     @Override
     public void add(E element) {
-        if (this.arrSize == this.arr.length) increaseCapacity();
-        this.arr[this.arrSize] = element;
-        this.arrSize++;
-        this.isSorted = false;
+        if (this.arraySize == this.array.length) increaseCapacity();
+        this.array[this.arraySize] = element;
+        this.arraySize++;
     }
 
     /**
      * Добавляет элемент в указанное место в массиве.
      * В массиве не происходит никаких сдвигов влево после добавления элемента.
-     * @throws IllegalArgumentException - если индекс меньше нуля или больше вместимости массива.
+     * @throws IllegalArgumentException если индекс меньше нуля или больше вместимости массива
      */
     @Override
     public void add(int index, E element) {
-        if (this.arrSize == this.arr.length) increaseCapacity();
+        if (this.arraySize == this.array.length) increaseCapacity();
+
         checkBounds(index);
+
         for (int i = this.size(); i > index; i--) {
-            this.arr[i] = this.arr[i - 1];
+            this.array[i] = this.array[i - 1];
         }
-        this.arr[index] = element;
-        this.arrSize++;
-        this.isSorted = false;
+
+        this.array[index] = element;
+        this.arraySize++;
     }
 
     /**
      *
      * @return значение по индексу
-     * @throws IllegalArgumentException - индекс меньше нуля или больше вместимости.
+     * @throws IllegalArgumentException индекс меньше нуля или больше вместимости
      */
     @Override
     public E get(int index) {
         checkBounds(index);
-        return (E) this.arr[index];
+        return (E) this.array[index];
     }
 
     /**
      * Вставляет по указанному индексу элемент перезаписывая
      * ячейку и возвращает замененный элемент.
      * @return элемент, который был заменен
-     * @throws IllegalArgumentException - индекс меньше нуля или больше вместимости.
+     * @throws IllegalArgumentException индекс меньше нуля или больше вместимости
      */
     @Override
     public E set(int index, E element) {
         checkBounds(index);
+
         E oldValue = get(index);
-        this.arr[index] = element;
-        this.isSorted = false;
+        this.array[index] = element;
+
         return oldValue;
     }
 
     /**
      *
-     * @return удаляет элемент по указанному индексу и возвращает его.
-     * После удаления все элементы массива, стоящие справа, сдвигаются влево на 1.
+     * @return удаляет элемент по указанному индексу и возвращает его
+     * После удаления все элементы массива, стоящие справа, сдвигаются влево на 1
      */
     @Override
     public E remove(int index) {
@@ -109,18 +110,19 @@ public class ArrayList_StanislavFedin<E> implements IntensiveList<E>{
 
         if (index == size() - 1) {
             E oldValue = get(index);
-            this.arr[index] = null;
-            this.arrSize--;
+            this.array[index] = null;
+            this.arraySize--;
+
             return oldValue;
         }
 
         E oldValue = get(index);
 
         for (int i = index; i < size() - 1; i++) {
-            this.arr[i] = this.arr[i+1];
+            this.array[i] = this.array[i+1];
         }
-        this.arr[size() - 1] = null;
-        this.arrSize--;
+        this.array[size() - 1] = null;
+        this.arraySize--;
 
         return oldValue;
     }
@@ -131,19 +133,18 @@ public class ArrayList_StanislavFedin<E> implements IntensiveList<E>{
      */
     @Override
     public void clear() {
-        for (int i = 0; i < size(); i++) this.arr[i] = null;
-        this.arrSize = 0;
-        this.arr = new Object[DEFAULT_CAPACITY];
+        for (int i = 0; i < size(); i++) this.array[i] = null;
+        this.arraySize = 0;
+        this.array = new Object[DEFAULT_CAPACITY];
     }
 
     /**
      * Сортирует элементы массива с помощью алгоритма быстрой сортировки.
-     * @param comparator - инструмент для сравнения двух объектов.
+     * @param comparator инструмент для сравнения двух объектов
      */
     @Override
     public void quickSort(Comparator<E> comparator) {
-        quickSortImpl(0, this.arrSize-1, comparator);
-        this.isSorted = true;
+        quickSortImpl(0, this.arraySize -1, comparator);
     }
 
     /**
@@ -151,8 +152,14 @@ public class ArrayList_StanislavFedin<E> implements IntensiveList<E>{
      * @return состояние отсоритированности массива.
      */
     @Override
-    public boolean isSorted() {
-        return isSorted;
+    public boolean isSorted(Comparator<E> comparator) {
+        if (this.size() < 1) return true;
+
+        for (int i = 1; i < this.size(); i++) {
+            if (comparator.compare((E) this.array[i - 1], (E) this.array[i]) < 0) return false;
+        }
+
+        return true;
     }
 
     /**
@@ -167,17 +174,20 @@ public class ArrayList_StanislavFedin<E> implements IntensiveList<E>{
 
         if (size < size()) {
             Object[] newArr = new Object[size];
-            this.arrSize = 0;
+            this.arraySize = 0;
+
             for (int i = 0; i < size; i++) {
-                newArr[i] = this.arr[i];
-                this.arrSize++;
+                newArr[i] = this.array[i];
+                this.arraySize++;
             }
-            this.arr = newArr;
+
+            this.array = newArr;
         }
     }
 
     private void checkBounds(int index) {
-        if (index >= this.arr.length || index < 0) throw new IllegalArgumentException("Incorrect index value");
+        if (index >= this.array.length || index < 0)
+            throw new IllegalArgumentException("Incorrect index value, got: " + index);
     }
 
     private void quickSortImpl(int begin, int end, Comparator<E> comparator) {
@@ -196,8 +206,8 @@ public class ArrayList_StanislavFedin<E> implements IntensiveList<E>{
 
             if (i <= j) {
                 E tmp = get(i);
-                this.arr[i] = get(j);
-                this.arr[j] = tmp;
+                this.array[i] = get(j);
+                this.array[j] = tmp;
                 i++;
                 j--;
             }
@@ -208,14 +218,14 @@ public class ArrayList_StanislavFedin<E> implements IntensiveList<E>{
     }
 
     private void increaseCapacity() {
-        Object[] newArray = new Object[this.arr.length + (this.arr.length / 2)];
+        Object[] newArray = new Object[this.array.length + (this.array.length / 2)];
         copyOf(newArray);
     }
 
     private void copyOf(Object[] newArray) {
-        for (int i = 0; i < this.arrSize; i++) {
-            newArray[i] = this.arr[i];
+        for (int i = 0; i < this.arraySize; i++) {
+            newArray[i] = this.array[i];
         }
-        this.arr = newArray;
+        this.array = newArray;
     }
 }

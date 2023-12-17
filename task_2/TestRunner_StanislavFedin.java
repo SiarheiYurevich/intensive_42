@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Scans the specified packages for methods annotated with the @IntensiveTest_StanislavFedin
+ * Scans the specified packages for methods annotated with the <code>@IntensiveTest_StanislavFedin</code>
  * annotation and performs test validation.
  * @author Stanislav Fedin
  */
@@ -18,42 +18,43 @@ public class TestRunner_StanislavFedin {
     private static final char PKG_SEPARATOR = '.';
     private static final String CLASS_FILE_SUFFIX = ".class";
 
-    public static void main(String[] args) {
-        Package pak = ClassLoader.getSystemClassLoader().getDefinedPackage("task_2");
-        Package[] arr = {pak};
-        testRunner(arr);
-    }
-
     /**
      * Accepts an array of packages that will search
-     * for classes with static methods marked with the IntensiveTest_StanislavFedin annotation,
+     * for classes with static methods marked with the <code>@IntensiveTest_StanislavFedin</code> annotation,
      * and then invoke these methods.
+     * <br><br>
      * <p>Note: A method marked with an annotation must not accept arguments
-     * @param packages - Packages in which scanning will be performed
+     * @param packages Packages in which scanning will be performed
      *
      */
-    public static void testRunner(Package[] packages){
+    public static void testRunner(List<Package> packages){
         List<Class<?>> classes = scannedClasses(packages);
 
         classes.forEach(cls -> Arrays.stream(cls.getDeclaredMethods())
                 .forEachOrdered(md -> {
                     if (md.isAnnotationPresent(IntensiveTest_StanislavFedin.class)) {
                         try {
-                            md.invoke(null);
+                            /*
+                            For now, a method call without parameters has been implemented
+                             */
+                            switch (md.getParameterCount()) {
+                                case 0 -> md.invoke(null);
+                            }
                         } catch (IllegalAccessException | InvocationTargetException e) {
-                            throw new RuntimeException(e);
+                            System.out.println(e.getMessage());
+                            System.out.printf("Test %s has been failed", md.getName());
                         }
                     }
                 }));
     }
 
-    private static List<Class<?>> scannedClasses(Package[] packages) {
+    private static List<Class<?>> scannedClasses(List<Package> packages) {
         List<Class<?>> classes = new ArrayList<>();
 
         for (Package pak : packages) {
             URL scannedUrl = Thread.currentThread().getContextClassLoader().getResource(pak.getName());
 
-            if (scannedUrl == null) throw new IllegalArgumentException("Packages is not defined");
+            if (scannedUrl == null) continue;
 
             File scannedDir = new File(scannedUrl.getFile());
 
@@ -65,10 +66,12 @@ public class TestRunner_StanislavFedin {
 
     private static void findAndAdd(List<Class<?>> classes, File file, String packageName) {
         String resource = packageName + PKG_SEPARATOR + file.getName();
+
         if (file.isDirectory()) {
             Arrays.stream(Objects.requireNonNull(file.listFiles()))
-                    .forEach(file1 -> findAndAdd(classes, file1, resource));
+                    .forEach(innerFile -> findAndAdd(classes, innerFile, resource));
         } else if (resource.endsWith(CLASS_FILE_SUFFIX)) {
+
             int classPathLength = resource.length() - CLASS_FILE_SUFFIX.length();
             String className = resource.substring(0, classPathLength);
 
