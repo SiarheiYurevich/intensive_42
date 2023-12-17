@@ -1,4 +1,4 @@
-package org.maximyasn.myArrayList;
+package task1;
 
 import java.util.Comparator;
 
