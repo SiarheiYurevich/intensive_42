@@ -1,8 +1,10 @@
-package org.maximyasn.myArrayList;
+package task1;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
+
+
 
 /**
  * Кастомная реализация динамического массива.
@@ -278,7 +280,9 @@ public class MyArrayList<E> implements IntensiveList<E> {
         return (E[]) newStorage;
     }
 
-
+    public E[] getStorage() {
+        return storage;
+    }
 
     @Override
     public String toString() {
@@ -299,10 +303,16 @@ public class MyArrayList<E> implements IntensiveList<E> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MyArrayList<?> that = (MyArrayList<?>) o;
+        MyArrayList<E> that = (MyArrayList<E>) o;
 
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        return Arrays.equals(storage, that.storage);
+        if(this.size != that.size) return false;
+
+        for (int i = 0; i < size; i++) {
+            if(!this.storage[i].equals(that.storage[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
