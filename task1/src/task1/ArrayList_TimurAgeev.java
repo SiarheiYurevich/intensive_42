@@ -5,35 +5,20 @@ import java.util.Comparator;
 
 public class ArrayList_TimurAgeev<E> implements IntensiveList<E> {
     private E[] array;
-    /**
-     * размер списка
-     */
     private int size;
-    /**
-     * длина массива по умолчанию
-     */
     private final static int DEFAULT_CAPACITY = 10;
+    private final static double CAPACITY_MULTIPLIER = 1.5;
 
     @SuppressWarnings("unchecked")
     public ArrayList_TimurAgeev() {
         array = (E[]) new Object[DEFAULT_CAPACITY];
     }
 
-    /**
-     * @return Возвращает текущий размер листа
-     */
     @Override
     public int size() {
         return size;
     }
 
-    /**
-     * Если размер листа равен или больше длине массива,
-     * то создается новый массив с теми же данными и длиной массива в 1.5 раза больше текущего,
-     * Вставляет переданный элемент в конец списка и увеличивает размер массива на 1
-     *
-     * @param element элемент, который необходимо вставить
-     */
     @Override
     public void add(E element) {
         if (size >= array.length) {
@@ -44,17 +29,6 @@ public class ArrayList_TimurAgeev<E> implements IntensiveList<E> {
         size++;
     }
 
-    /**
-     * Проверяет валидность index и в случае если он не валиден выбрасывает {@link IndexOutOfBoundsException}.
-     * Если размер листа равен или больше длине массива,
-     * то создается новый массив с теми же данными и длиной массива в 1.5 раза больше текущего,
-     * Пересоздает массив с теми же элементами, но начиная с index копирует количество элементов равных size - index и вставляет их начиная с индекса равного index + 1.
-     * тем самым вставляет переданный элемент по указанному индексу
-     * увеличивает размер на 1
-     *
-     * @param index   индекс, по которому нужно вставить элемент
-     * @param element элемент, который необходимо вставить по указанному индексу
-     */
     @Override
     public void add(int index, E element) {
         checkIndex(index);
@@ -68,13 +42,6 @@ public class ArrayList_TimurAgeev<E> implements IntensiveList<E> {
         size++;
     }
 
-    /**
-     * Проверяет валидность index и в случае если он не валиден выбрасывает {@link IndexOutOfBoundsException}.
-     * Возвращает элемент списка по переданному индексу.
-     *
-     * @param index - индекс, по которому нужно найти элемент
-     * @return элемент по указанному индексу
-     */
     @Override
     public E get(int index) {
         checkIndex(index);
@@ -82,15 +49,6 @@ public class ArrayList_TimurAgeev<E> implements IntensiveList<E> {
         return array[index];
     }
 
-
-    /**
-     * Проверяет валидность "index" и в случае если он не валиден выбрасывает {@link IndexOutOfBoundsException}.
-     * Записывает переданный элемент по указанному индексу.
-     *
-     * @param index   индекс по которому будет перезаписан элемент
-     * @param element элемент, который будет записан по переданному индексу.
-     * @return возвращает элемент, который был перезаписан
-     */
     @Override
     public E set(int index, E element) {
         checkIndex(index);
@@ -101,16 +59,6 @@ public class ArrayList_TimurAgeev<E> implements IntensiveList<E> {
         return replaceableElement;
     }
 
-    /**
-     * Проверяет валидность index и в случае если он не валиден выбрасывает {@link IndexOutOfBoundsException}
-     * Пересоздает массив с теми же элементами, но начиная с index + 1 копирует количество элементов равных size - index - 1 и вставляет их начиная с индекса равного index + 1.
-     * устанавливает последнему элементу списка значение null.
-     * Тем самым удаляет элемент по указанному индексу
-     * уменьшает размер списка на 1
-     *
-     * @param index индекс, по которму будет удален элемент.
-     * @return возвращает удаленный элемент.
-     */
     @Override
     public E remove(int index) {
         checkIndex(index);
@@ -124,9 +72,6 @@ public class ArrayList_TimurAgeev<E> implements IntensiveList<E> {
         return removedElement;
     }
 
-    /**
-     * Пересоздает массив с null значениями, размером DEFAULT_CAPACITY = 10 и устанавливает размер 0.
-     */
     @SuppressWarnings("unchecked")
     @Override
     public void clear() {
@@ -134,12 +79,6 @@ public class ArrayList_TimurAgeev<E> implements IntensiveList<E> {
         size = 0;
     }
 
-    /**
-     * Поверяет не отсортирован ли список. Если список отсортирован - работа метода прекращается. Если список не остортирован -
-     * производит быструю сортировку по возрастанию используя переданный компаратор.
-     *
-     * @param comparator переданный компаратор, по которому происходит сравнение объектов
-     */
     @Override
     public void quickSort(Comparator<E> comparator) {
         if (isSorted(comparator)) {
@@ -149,14 +88,6 @@ public class ArrayList_TimurAgeev<E> implements IntensiveList<E> {
         sortArray(array, 0, size - 1, comparator);
     }
 
-
-    /**
-     * Поверяет не отсортирован ли список.
-     * Если размер списка <= 1, проверка не проводится, считается что список отсортирован.
-     *
-     * @param comparator переданный компаратор, по которому происходит сравнение объектов
-     * @return true, если список отсортирован; иначе -  false
-     */
     @Override
     public boolean isSorted(Comparator<E> comparator) {
         if (size <= 1) {
@@ -172,12 +103,6 @@ public class ArrayList_TimurAgeev<E> implements IntensiveList<E> {
         return true;
     }
 
-    /**
-     * Создается копия массива в который копируются значения с текущего массива начиная с 0-го индекса элемента, заканчивая индексом элемента равным size.
-     * устанавливает размер списка переданному значению size
-     *
-     * @param size устанавливаемый размер списка
-     */
     @Override
     public void split(int size) {
         if (size < 0) {
@@ -192,7 +117,7 @@ public class ArrayList_TimurAgeev<E> implements IntensiveList<E> {
      * Пересоздает массив с длинной равной 1.5 длины существующего массива и копирует в него все элементы из существующего.
      */
     private void increaseCapacity() {
-        array = Arrays.copyOf(array, (int) (size * 1.5));
+        array = Arrays.copyOf(array, (int) (size * CAPACITY_MULTIPLIER));
     }
 
     /**

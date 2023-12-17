@@ -6,8 +6,11 @@ import java.util.Comparator;
 
 public class Assertions_TimurAgeev<E> {
     /**
-     * Выполняет проверку эквивалентности двух списков путем проверки размера списков,
-     * если размеры списков равны, то поэлементно сравнивает их.
+     * Выполняет проверку эквивалентности двух списков
+     *
+     * @param list1 первый список для сравнения
+     * @param list2 второй список для сравнения
+     * @return true, если списки эквивалентны, иначе - false
      */
     public static <E> boolean assertEquals(IntensiveList<E> list1, IntensiveList<E> list2) {
         if (list1.size() != list2.size()) {
@@ -24,7 +27,11 @@ public class Assertions_TimurAgeev<E> {
     }
 
     /**
-     * Выполняет проверку сортировки списка используя компаратор.
+     * Выполняет проверку сортировки списка используя компаратор
+     *
+     * @param list       список для проверки на отсортированность
+     * @param comparator компаратор, по которому происходит сравнение элементов списка
+     * @return true, если список отсортрован, иначе - false
      */
     public static <E> boolean assertIsSorted(IntensiveList<E> list, Comparator<E> comparator) {
         return list.isSorted(comparator);
