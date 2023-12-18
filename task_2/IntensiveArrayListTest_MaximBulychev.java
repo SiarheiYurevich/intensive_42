@@ -87,8 +87,8 @@ public class IntensiveArrayListTest_MaximBulychev {
     }
 
     /**
-     * Создаются 2 одинаковых списка, и проверяется, что метод {@code equals()} вернёт
-     * {@code true}.
+     * Создаются 2 неодинаковых списка, и проверяется, что метод {@code equals()} вернёт
+     * {@code true} (проверка вывода ошибки).
      */
     @IntensiveTest_MaximBulychev
     public void testEquals() {
