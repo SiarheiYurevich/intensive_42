@@ -27,9 +27,13 @@ public class ArrayList_YauheniDziamyanau <E> implements IntensiveList<E> {
      */
     public ArrayList_YauheniDziamyanau(int capacity) {
         if(capacity<0){
-            throw new IllegalArgumentException();}
+            throw new IllegalArgumentException("Неверный аргумент конструктора");}
+
         else if(capacity<=7){
-        this.arr= new Object[CAPACITY];}
+            this.arr= new Object[CAPACITY];
+        }
+
+
         else this.arr = new Object[(int) (capacity*1.5)];
 
     }
@@ -50,6 +54,7 @@ public class ArrayList_YauheniDziamyanau <E> implements IntensiveList<E> {
             riseArray();
         }
         for(int i=0; i<arr.length; i++) {
+
             if (arr[i] == null) {
                 arr[i] = element;
                 break;
@@ -64,6 +69,7 @@ public class ArrayList_YauheniDziamyanau <E> implements IntensiveList<E> {
 
     private void riseArray() {
       Object[] newArr= new Object[(int) (arr.length*1.5)];
+
       for(int i=0; i<this.arr.length; i++){
       newArr[i]=arr[i];}
 
@@ -82,13 +88,20 @@ public class ArrayList_YauheniDziamyanau <E> implements IntensiveList<E> {
         Object[] newArr= new Object[arr.length];
         for(int i=0; i<arr.length-1;i++){
             newArr[i+1]=arr[i];}
+
+
         int oldSize=size();
         split(index);
+
+
         for(int n=0; n<arr.length;n++){
             newArr[n]=arr[n];}
+
+
         newArr[index]=element;
         arr=newArr;
         this.size=oldSize;
+
         size++;
     }
 
@@ -97,7 +110,7 @@ public class ArrayList_YauheniDziamyanau <E> implements IntensiveList<E> {
     @Override
     public E get(int index) {
         if(index<0 && index>=size){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Неверный аргумент в методе get");
         }
         return (E) this.arr[index];
     }
@@ -105,7 +118,7 @@ public class ArrayList_YauheniDziamyanau <E> implements IntensiveList<E> {
     @Override
     public E set(int index, E element) {
         if(index<0){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Неверный аргумент в методе set");
         }
         this.arr[index]=element;
         size++;
@@ -122,11 +135,13 @@ public class ArrayList_YauheniDziamyanau <E> implements IntensiveList<E> {
         if(index==size-1) {
             arr[index] = null;
         }
+
         else {
             for (int i = index; i < size - 1; i++) {
                 arr[i] = arr[i + 1];
             }
         }
+
         size--;
         if(size==0)
          arr=new Object[CAPACITY];
@@ -142,9 +157,12 @@ public class ArrayList_YauheniDziamyanau <E> implements IntensiveList<E> {
 
     private void reduceArray(){
         Object[] newArr;
+
         if(arr.length/1.5<10){
             newArr=new Object[CAPACITY];
         }
+
+
         else {
             newArr = new Object[(int) (arr.length / 1.5)];
 
@@ -152,6 +170,8 @@ public class ArrayList_YauheniDziamyanau <E> implements IntensiveList<E> {
                 newArr[i] = arr[i];
             }
         }
+
+
 
         this.arr= newArr;
     }
@@ -216,38 +236,50 @@ public class ArrayList_YauheniDziamyanau <E> implements IntensiveList<E> {
 
     @Override
     public String toString() {
-        StringBuilder sb=new StringBuilder();
-        sb.append("[");
-        for(int i=0; i<size;i++){
-            sb.append(arr[i]+" ");
-        }
-        sb.append("]");
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append("[");
 
-        return sb.toString();
+
+        for(int i=0; i<size;i++){
+            stringBuilder.append(arr[i]+" ");
+        }
+
+        stringBuilder.append("]");
+
+        return stringBuilder.toString();
     }
 
     /**
      * проверяет отсортирован ли массив
      */
 
-    @Override
-    public boolean isSorted() {
-        return isSorted;
-    }
+    public boolean isSorted(Comparator<E> comparator) {
+        for (int i = 0; i < size - 1; i++) {
+            if (comparator.compare((E) arr[i], (E) arr[i + 1]) > 0) {
+                return false;
+            }
+        }
 
+        return true;
+
+    }
     /**
      * Получаем массив заданно длины От начала до x - заданная длина
      */
     @Override
     public void split(int newSize) {
         if(newSize< 0 || newSize > this.size ) {
-            throw new RuntimeException();
+            throw new RuntimeException("Неверный размер");
         }
+
+
         if(newSize < this.size) {
             Object[] newArr = new Object[newSize];
             for(int i = 0; i < newSize; i++) {
                 newArr[i] = arr[i];
             }
+
+
             this.arr=newArr;
             this.size=newSize;
         }

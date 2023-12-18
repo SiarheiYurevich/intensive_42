@@ -14,11 +14,11 @@ public class TestClass {
         System.out.println(arrayList.size());
         arrayList.add(6);
         arrayList.add(9);
-       arrayList.add(1,4);
-//        arrayList.remove(2);
-//        arrayList.split(2);
-//
-//
+        arrayList.add(1,4);
+        System.out.println(arrayList.toString());
+        System.out.println(arrayList.isSorted(Integer::compareTo));
+        System.out.println(arrayList.size());
+
        Comparator<Integer> comparator = new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
@@ -26,10 +26,18 @@ public class TestClass {
             }
         };
         arrayList.quickSort(comparator);
+        System.out.println(arrayList);
 
-        System.out.println(arrayList.toString());
-        System.out.println(arrayList.isSorted());
-        System.out.println(arrayList.size());
+        arrayList.split(5);
+        System.out.println(arrayList);
+
+        arrayList.remove(3);
+        System.out.println(arrayList);
+
+        arrayList.clear();
+        System.out.println(arrayList);
+
+
 
     }
 }
