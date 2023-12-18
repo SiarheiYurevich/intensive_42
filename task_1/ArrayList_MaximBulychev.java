@@ -13,8 +13,8 @@ import java.util.Objects;
  * Список имеет вместимость ({@code capacity}), которая является размером внутреннего массива
  * и размер ({@code size}), являющийся числом хранимых элементов в списке.
  *
+ * @param <E> тип элементов, хранимых в {@code ArrayList_MaximBulychev}
  * @author Максим Булычев
- * @param <E> тип элементов, хранимых в ArrayList_MaximBulychev
  */
 public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
 
@@ -24,7 +24,7 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     private int capacity;
 
     /**
-     * Стандартный конструктор класса ArrayList_MaximBulychev.
+     * Стандартный конструктор класса {@code ArrayList_MaximBulychev}.
      * Инициализирует внутренний массив, задаёт стандартную вместимость равную 10.
      */
     @SuppressWarnings("unchecked")
@@ -35,10 +35,10 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Конструктор класса ArrayList_MaximBulychev, позволяющий задать начальную
+     * Конструктор класса {@code ArrayList_MaximBulychev}, позволяющий задать начальную
      * вместимость внутреннего массива.
      *
-     * @param initialCapacity начальная вместимость внутреннего массива.
+     * @param initialCapacity начальная вместимость внутреннего массива
      */
     @SuppressWarnings("unchecked")
     public ArrayList_MaximBulychev(int initialCapacity) {
@@ -48,18 +48,18 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Возвращает количество элементов, содержащихся в ArrayList_MaximBulychev.
+     * Возвращает количество элементов, содержащихся в {@code ArrayList_MaximBulychev}.
      *
-     * @return количество элементов в ArrayList_MaximBulychev
+     * @return количество элементов в {@code ArrayList_MaximBulychev}
      */
     public int size() {
         return size;
     }
 
     /**
-     * Вставляет переданный элемент в конец ArrayList_MaximBulychev.
+     * Вставляет переданный элемент в конец {@code ArrayList_MaximBulychev}.
      *
-     * @param element элемент, который необходимо вставить.
+     * @param element элемент, который необходимо вставить
      */
     public void add(E element) {
         checkCapacityAndResize();
@@ -68,10 +68,10 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Вставляет переданный элемент в ArrayList_MaximBulychev на указанную позицию.
+     * Вставляет переданный элемент в {@code ArrayList_MaximBulychev} на указанную позицию.
      *
-     * @param index   позиция, на которую необходимо вставить элемент.
-     * @param element элемент, который необходимо вставить.
+     * @param index   позиция, на которую необходимо вставить элемент
+     * @param element элемент, который необходимо вставить
      * @throws IndexOutOfBoundsException -
      */
     public void add(int index, E element) {
@@ -92,11 +92,11 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Возвращает элемент ArrayList_MaximBulychev по указанной позиции.
+     * Возвращает элемент {@code ArrayList_MaximBulychev} по указанной позиции.
      *
-     * @param index индекс элемента, который необходимо получить.
-     * @return ссылка на найденный элемент.
-     * @throws IndexOutOfBoundsException (см. {@link ArrayList_MaximBulychev#checkIndex(int)}).
+     * @param index индекс элемента, который необходимо получить
+     * @return ссылка на найденный элемент
+     * @throws IndexOutOfBoundsException (см. {@link ArrayList_MaximBulychev#checkIndex(int)})
      */
     public E get(int index) {
         checkIndex(index);
@@ -104,12 +104,12 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Заменяет элемент в ArrayList_MaximBulychev на указанной позиции на новый переданный элемент.
+     * Заменяет элемент в {@code ArrayList_MaximBulychev} на указанной позиции на новый переданный элемент.
      *
-     * @param index   позиция, на которой необходимо произвести замену элемента.
-     * @param element элемент, который необходимо вставить.
-     * @return - ссылка на удалённый элемент.
-     * @throws IndexOutOfBoundsException (см. {@link ArrayList_MaximBulychev#checkIndex(int)}).
+     * @param index   позиция, на которой необходимо произвести замену элемента
+     * @param element элемент, который необходимо вставить
+     * @return - ссылка на удалённый элемент
+     * @throws IndexOutOfBoundsException (см. {@link ArrayList_MaximBulychev#checkIndex(int)})
      */
     public E set(int index, E element) {
         checkIndex(index);
@@ -119,11 +119,11 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Удаляет элемент с указанным индексом из ArrayList_MaximBulychev
+     * Удаляет элемент с указанным индексом из {@code ArrayList_MaximBulychev}.
      *
-     * @param index индекс элемента, который необходимо удалить.
-     * @return ссылка на удалённый элемент.
-     * @throws IndexOutOfBoundsException (см. {@link ArrayList_MaximBulychev#checkIndex(int)}).
+     * @param index индекс элемента, который необходимо удалить
+     * @return ссылка на удалённый элемент
+     * @throws IndexOutOfBoundsException (см. {@link ArrayList_MaximBulychev#checkIndex(int)})
      */
     public E remove(int index) {
         checkIndex(index);
@@ -137,10 +137,10 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Проверяет, содержится ли переданный элемент в ArrayList_MaximBulychev.
+     * Проверяет, содержится ли переданный элемент в {@code ArrayList_MaximBulychev}.
      *
-     * @param element элемент, наличие которого проверяется.
-     * @return {@code true}, если элемент содержится, иначе {@code false}.
+     * @param element элемент, наличие которого проверяется
+     * @return {@code true}, если элемент содержится, иначе {@code false}
      */
     public boolean contains(E element) {
         boolean result = false;
@@ -153,7 +153,7 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Удаляет все элементы из ArrayList_MaximBulychev,
+     * Удаляет все элементы из {@code ArrayList_MaximBulychev},
      * вместимость приводит к стандартному значению.
      */
     @SuppressWarnings("unchecked")
@@ -164,21 +164,21 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Сортирует элементы ArrayList_MaximBulychev в порядке возрастания,
-     * используя переданный компаратор.
+     * Сортирует элементы {@code ArrayList_MaximBulychev} в порядке возрастания,
+     * используя переданный {@code Comparator}.
      *
-     * @param comparator компаратор, который будет использоваться для сравнения элементов.
+     * @param comparator компаратор, который будет использоваться для сравнения элементов
      */
     public void quickSort(Comparator<E> comparator) {
         quickSortRecursive(comparator, 0, size - 1);
     }
 
     /**
-     * Проверяет, отсортированы ли элементы в ArrayList_MaximBulychev в порядке возрастания,
-     * используя переданный {@code Comparator}
+     * Проверяет, отсортированы ли элементы в {@code ArrayList_MaximBulychev} в порядке возрастания,
+     * используя переданный {@code Comparator}.
      *
-     * @param comparator компаратор, который будет использоваться для сравнения элементов.
-     * @return {@code true}, если список отсортирован, иначе {@code false}.
+     * @param comparator компаратор, который будет использоваться для сравнения элементов
+     * @return {@code true}, если список отсортирован, иначе {@code false}
      **/
     public boolean isSorted(Comparator<E> comparator) {
         boolean result = true;
@@ -195,8 +195,8 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
      * Уменьшает вместимость внутреннего массива до указанного значения.
      * Элементы, которые оказались за пределами, не сохраняются.
      *
-     * @param size новая вместимость массива.
-     * @throws IndexOutOfBoundsException если новая вместимость меньше 0.
+     * @param size новая вместимость массива
+     * @throws IndexOutOfBoundsException если новая вместимость меньше 0
      */
     public void split(int size) {
         if (size < 0) {
@@ -206,9 +206,9 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Возвращает содержимое ArrayList_MaximBulychev как строку.
+     * Возвращает содержимое {@code ArrayList_MaximBulychev} как строку.
      *
-     * @return строка элементов.
+     * @return строка элементов
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -228,8 +228,8 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
      * если класс переданного объекта тоже является реализацией инерфейса {@code IntensiveList},
      * оба списка имеют одинаковый размер и все элементы в них попарно эквивалентны друг другу.
      *
-     * @param o объект, с которым необходимо сравнить данный список.
-     * @return {@code true}, если списки эквивалентны, иначе {@code false}.
+     * @param o объект, с которым необходимо сравнить данный список
+     * @return {@code true}, если списки эквивалентны, иначе {@code false}
      */
     public boolean equals(Object o) {
         if (this == o)
@@ -252,7 +252,8 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     /**
      * Возвращает значение хэш-кода данного списка. Значение зависит от размера списка
      * и значения хэш-кода каждого хранящегося в нём элемента.
-     * @return значение хэш-кода данного списка.
+     *
+     * @return значение хэш-кода данного списка
      */
     public int hashCode() {
         int result = Objects.hash(size);
@@ -292,7 +293,7 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
      * Если новая вместимость меньше количества элементов, хранящихся в массиве,
      * не поместившиеся элементы теряются.
      *
-     * @param newCapacity новое значение вместимости внутреннего массива.
+     * @param newCapacity новое значение вместимости внутреннего массива
      */
     @SuppressWarnings("unchecked")
     private void changeInnerArrayCapacity(int newCapacity) {
@@ -309,9 +310,9 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
      * Рекурсивный метод сортировки внутреннего массива. Сравнение элементов производится
      * по правилам переданного компаратора.
      *
-     * @param comparator переданный компаратор.
-     * @param left       минимальный индекс подмассива.
-     * @param right      максимальный индекс подмассива.
+     * @param comparator переданный компаратор
+     * @param left       минимальный индекс подмассива
+     * @param right      максимальный индекс подмассива
      */
     private void quickSortRecursive(Comparator<E> comparator, int left, int right) {
         if (right - left < 2) {
@@ -329,8 +330,8 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
      * Сортирует подмассив, содержащий не более двух элементов по правилам
      * переданного компаратора.
      *
-     * @param left  минимальный индекс подмассива.
-     * @param right максимальный индекс подмассива.
+     * @param left  минимальный индекс подмассива
+     * @param right максимальный индекс подмассива
      */
     private void manualSort(Comparator<E> comparator, int left, int right) {
         if (left < right) {
@@ -346,10 +347,10 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
      * а правый - большие или равные опорному.
      * Сравнение производится по правилам переданного компаратора.
      *
-     * @param left     минимальный индекс подмассива.
-     * @param right    максимальный индекс подмассива.
-     * @param pivot опорный элемент.
-     * @return минимальный индекс элемента большего либо равного опорному (точка разделения).
+     * @param left  минимальный индекс подмассива
+     * @param right максимальный индекс подмассива
+     * @param pivot опорный элемент
+     * @return минимальный индекс элемента большего либо равного опорному (точка разделения)
      */
     private int partition(Comparator<E> comparator, int left, int right, E pivot) {
         int leftPoint = left;
@@ -372,11 +373,11 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
      * по правилам переданного компаратора, после чего возвращается элемент, находящийся
      * на средней позиции (он же имеет среднее значение).
      *
-     * @param comparator переданный компаратор.
-     * @param left       минимальный индекс подмассива.
-     * @param middle     средний индекс подмассива.
-     * @param right      максимальный индекс подмассива.
-     * @return выбранный опорный элемент.
+     * @param comparator переданный компаратор
+     * @param left       минимальный индекс подмассива
+     * @param middle     средний индекс подмассива
+     * @param right      максимальный индекс подмассива
+     * @return выбранный опорный элемент
      */
     private E getPivotAndSwap(Comparator<E> comparator, int left, int middle, int right) {
         if (comparator.compare(array[left], array[middle]) > 0) {
@@ -394,8 +395,8 @@ public class ArrayList_MaximBulychev<E> implements IntensiveList<E> {
     /**
      * Меняет два элемента с указанными индексами местами.
      *
-     * @param a индекс первого элемента.
-     * @param b индекс второго элемента.
+     * @param a индекс первого элемента
+     * @param b индекс второго элемента
      */
     private void swap(int a, int b) {
         E temp = array[a];
