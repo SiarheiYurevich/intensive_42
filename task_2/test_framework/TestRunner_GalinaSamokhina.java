@@ -59,13 +59,14 @@ public class TestRunner_GalinaSamokhina {
         try {
             Stream<Path> fileStream = Files.list(Paths.get(resource.toURI()));
             List<Path> files = fileStream.collect(Collectors.toList());
+            String extension = ".class";
 
             for (Path file : files) {
                 String fileName = file.getFileName().toString();
                 if (Files.isDirectory(file)) {
                     classes.addAll(getClasses(packageName + "." + fileName));
-                } else if (fileName.endsWith(".class")) {
-                    String className = packageName + '.' + fileName.substring(0, fileName.length() - 6);
+                } else if (fileName.endsWith(extension)) {
+                    String className = packageName + '.' + fileName.substring(0, fileName.length() - extension.length());
                     classes.add(ClassLoader.getSystemClassLoader().loadClass(className));
                 }
             }

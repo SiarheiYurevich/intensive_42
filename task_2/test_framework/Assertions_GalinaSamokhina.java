@@ -38,7 +38,7 @@ public class Assertions_GalinaSamokhina {
      */
     public static void assertEquals(Object expected, Object actual) throws Exception {
         if (!Objects.equals(expected, actual)) {
-            throw new Exception("Expected and Actual Objects are not equal");
+            throw new Exception("Expected '" + expected + "' and Actual '" + actual + "' are not equal");
         }
     }
 
@@ -50,7 +50,7 @@ public class Assertions_GalinaSamokhina {
      */
     public static void assertNotEquals(Object expected, Object actual) throws Exception {
         if (Objects.equals(expected, actual)) {
-            throw new Exception("Expected and Actual Objects are equal");
+            throw new Exception("Expected '" + expected + "' and Actual '" + actual + "' Objects are equal");
         }
     }
 
@@ -70,7 +70,7 @@ public class Assertions_GalinaSamokhina {
             throw new Exception("One of arrays is null");
         }
         if (expected.size() != actual.size()) {
-            throw new Exception("Length of expected and actual arrays is not the same");
+            throw new Exception("Length of expected (" + expected.size() + ") and actual (" + actual.size() + ") arrays is not the same");
         }
 
         for (int i = 0; i < expected.size(); i++) {
