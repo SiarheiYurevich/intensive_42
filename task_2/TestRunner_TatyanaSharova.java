@@ -95,6 +95,7 @@ public class TestRunner_TatyanaSharova {
             } else if (fileName.endsWith(".class")) {
                 try {
                     String className = packageName + "." + fileName.substring(0, fileName.length() - 6);
+                    className = className.startsWith(".")? className.substring(1) : className;
                     classes.add(Class.forName(className));
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
@@ -103,6 +104,4 @@ public class TestRunner_TatyanaSharova {
         }
         return classes;
     }
-
-
 }

@@ -1,6 +1,8 @@
 package task_1;
 
 
+import task_2.Assertions_TatyanaSharova;
+
 import java.util.Comparator;
 import java.util.List;
 

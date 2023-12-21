@@ -21,7 +21,7 @@ public class ArrayList_TatyanaSh<E> implements IntensiveList<E> {
      * Количество элементов, которые содержит ArrayList_TatyanaSh.
      */
     private int size;
-    private boolean isSorted = false;
+
 
     /**
      * Создает пустой список с начальной емкостью десять.
@@ -82,7 +82,7 @@ public class ArrayList_TatyanaSh<E> implements IntensiveList<E> {
         }
         checkIndex(size, index);
         int destinationStartIndex = index + 1;
-        int sizeForCopy = size  - index;
+        int sizeForCopy = size - index;
         System.arraycopy(array, index, array, destinationStartIndex, sizeForCopy);
         array[index] = element;
         size++;
@@ -142,9 +142,9 @@ public class ArrayList_TatyanaSh<E> implements IntensiveList<E> {
     public E remove(int index) {
         checkIndex(size, index);
         E removedElement = array[index];
-       int sourceStartIndex = index + 1;
-       int sizeForCopy = size - 1 - index;
-        System.arraycopy(array, sourceStartIndex, array, index,sizeForCopy);
+        int sourceStartIndex = index + 1;
+        int sizeForCopy = size - 1 - index;
+        System.arraycopy(array, sourceStartIndex, array, index, sizeForCopy);
         array[size - 1] = null;
         size--;
         return removedElement;
@@ -207,21 +207,17 @@ public class ArrayList_TatyanaSh<E> implements IntensiveList<E> {
 
     @Override
     public boolean isSorted(Comparator<E> comparator) {
-        int i = 0;
-        while (true) {
-            if (i + 1 < size) {
-                if (comparator.compare(array[i], array[i + 1]) <= 0) {
-                    i++;
-                    continue;
-                } else {
-                   isSorted = false;
-                    break;
-                }
-            }
-            break;
+        if (size < 2) {
+            return true;
         }
-        return isSorted;
+        for (int i = 1; i < size; i++) {
+            if (comparator.compare(array[i - 1], array[i]) > 0) {
+                return false;
+            }
+        }
+        return true;
     }
+
 
     /**
      * Обрезает список до указанного размера
