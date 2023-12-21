@@ -1,35 +1,38 @@
-package task_1;
+package task_1.intensive_list_implementations;
+
+import task_1.intensive_list_interface.IntensiveList;
 
 import java.util.Comparator;
 
 /**
- * Реализация списка на основе
- * динамически расширяющегося массива
- * @author Змеев Александр
- * @param <E> тип элементов, хранимых в массиве
+ * Реализация {@code IntensiveList} на основе
+ * динамически расширяющегося массива.
+ *
+ * @param <E> тип элементов, хранимых в {@code ArrayList_AleksandrZmeyev}
+ * @author Александр Змеев
  */
 public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
 
     /**
-     *Вместимость массива по умолчанию
+     * Вместимость {@code data} по умолчанию
      */
     private static final int DEFAULT_CAPACITY = 10;
     /**
-     *Множитель увеличения вместимости массива при его переполнении
+     * Множитель увеличения вместимости {@code data} при его переполнении
      */
     private static final int INCREASE_MULTIPLIER = 2;
     /**
-     *Массив данных
+     * Массив данных
      */
     private E[] data;
     /**
-     *Размер массива
+     * Размер {@code data}
      */
     private int size = 0;
 
     /**
-     *Стандартный конструктор ArrayList_AleksandrZmeyev
-     * с вместимостью массива по умолчанию
+     * Стандартный конструктор {@code ArrayList_AleksandrZmeyev}
+     * с вместимостью {@code data} по умолчанию
      */
     @SuppressWarnings("unchecked")
     public ArrayList_AleksandrZmeyev() {
@@ -37,9 +40,10 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     *Конструктор ArrayList_AleksandrZmeyev,
+     * Конструктор {@code ArrayList_AleksandrZmeyev},
      * позволяющий задать начальную вместимость
-     * @param capacity вместимость массива
+     *
+     * @param capacity вместимость {@code data}
      * @throws IllegalArgumentException вместимость задана некорректно
      */
     @SuppressWarnings("unchecked")
@@ -49,12 +53,13 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
         } else if (capacity == 0) {
             data = (E[]) new Object[DEFAULT_CAPACITY];
         } else {
-            throw new IllegalArgumentException("Illegal Capacity: "+ capacity);
+            throw new IllegalArgumentException("Illegal Capacity: " + capacity);
         }
     }
 
     /**
-     *Возвращает количество элементов в массиве
+     * Возвращает количество элементов в {@code data}
+     *
      * @return количество элементов
      */
     @Override
@@ -63,8 +68,9 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     *Производит вставку элемента в конец массива.
-     * При переполнении массива его вместимость увеличивается.
+     * Производит вставку элемента в конец {@code data}.
+     * При переполнении {@code data} его вместимость увеличивается.
+     *
      * @param element элемент, который необходимо вставить
      */
     @Override
@@ -75,19 +81,21 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     *Производит вставку элемента по указанному индексу.
-     * При переполнении массива его вместимость увеличивается.
-     * @param index позиция в массиве, в которую вставляется элемент
+     * Производит вставку элемента по указанному индексу.
+     * При переполнении {@code data} его вместимость увеличивается.
+     *
+     * @param index   позиция в массиве, в которую вставляется элемент
      * @param element элемент, который необходимо вставить
      * @throws IndexOutOfBoundsException некорректный индекс
      * ({@link ArrayList_AleksandrZmeyev#checkIndex(int)})
      */
     @Override
     public void add(int index, E element) {
-        if(index != size) {
+        if (index != size) {
             checkIndex(index);
         }
         checkCapacity();
+
         for (int i = size; i > index; i--) {
             data[i] = data[i - 1];
         }
@@ -96,7 +104,8 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Возвращает элемент массива по указанному индексу.
+     * Возвращает элемент {@code data} по указанному индексу.
+     *
      * @param index позиция в массиве, элемент которой необходимо получить
      * @return ссылка элемента по указанному индексу
      * @throws IndexOutOfBoundsException некорректный индекс
@@ -109,8 +118,9 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Заменяет элемент массива по указанному индексу на элемент, переданный в аргументе.
-     * @param index позиция в массиве, элемент которой необходимо заменить
+     * Заменяет элемент {@code data} по указанному индексу на элемент, переданный в аргументе.
+     *
+     * @param index   позиция в массиве, элемент которой необходимо заменить
      * @param element элемент для замены
      * @return ссылка на старый элемент по указанному индексу
      * @throws IndexOutOfBoundsException некорректный индекс
@@ -125,7 +135,8 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Удаляет элемент из массива по указанному индексу.
+     * Удаляет элемент из {@code data} по указанному индексу.
+     *
      * @param index позиция в массиве, элемент которой необходимо удалить
      * @return ссылка на удаленный элемент по указанному индексу
      * @throws IndexOutOfBoundsException некорректный индекс
@@ -144,8 +155,8 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Заменяет значения всех элементов массива на null.
-     * Вместимость массива остается прежней.
+     * Заменяет значения всех элементов {@code data} на {@code null}.
+     * Вместимость {@code data} остается прежней.
      */
     @Override
     public void clear() {
@@ -156,8 +167,9 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Обрезает массив до указанного размера.
-     * Вместимость массива сокращается до указанного размера.
+     * Обрезает {@code data} до указанного размера {@code size}.
+     * Вместимость {@code data} сокращается до указанного размера.
+     *
      * @param size новый размер массива
      * @throws IllegalArgumentException некорректный размер массива
      */
@@ -170,9 +182,10 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Производит быструю сортировку массива.
-     * Сравнение элементов производится по правилам, которые задает
-     * переданный в качестве параметра компаратор
+     * Производит быструю сортировку {@code data}.
+     * Сравнение элементов производится по правилам, которые задаются
+     * объектом класса {@code Comparator}.
+     *
      * @param comparator компаратор, задающий правила сортировки
      */
     @Override
@@ -181,8 +194,9 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Возвращает состояние упорядоченности элементов в списке,
+     * Возвращает состояние упорядоченности элементов в {@code data},
      * сравнивая элементы в естественном порядке.
+     *
      * @return true - список отсортирован, false - список не отсортирован
      */
     @Override
@@ -192,10 +206,11 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Возвращает состояние упорядоченности элементов в списке по
-     * правилам сравнения, которые заданы компаратором.
+     * Возвращает состояние упорядоченности элементов в {@code data} по
+     * правилам сравнения, которые задаются объектом класса {@code Comparator}.
+     *
      * @param comparator компаратор, задающий правила сортировки
-     * @return true - список отсортирован, false - список не отсортирован
+     * @return {@code true} - список отсортирован, {@code false} - список не отсортирован
      */
     @Override
     public boolean isSorted(Comparator<E> comparator) {
@@ -208,8 +223,9 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Возвращает элементы массива в виде строки
-     * @return элементы массива в виде строки
+     * Возвращает элементы {@code data} в виде {@code String}
+     *
+     * @return элементы массива в виде {@code String}
      */
     @Override
     public String toString() {
@@ -226,11 +242,12 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
 
     /**
      * Реализует алгоритм быстрой сортировки.
-     * Сравнение элементов производится по правилам, которые задает
-     * переданный в качестве параметра компаратор
-     * @param data массив элементов
-     * @param low нижний индекс подмассива
-     * @param high верхний индекс подмассива
+     * Сравнение элементов производится по правилам, которые задаются
+     * объектом класса {@code Comparator}.
+     *
+     * @param data       массив элементов
+     * @param low        нижний индекс подмассива
+     * @param high       верхний индекс подмассива
      * @param comparator компаратор, задающий правила сортировки
      */
     private void quickSort(E[] data, int low, int high, Comparator<E> comparator) {
@@ -266,10 +283,11 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Производит проверку индекса массива на приналдежность
-     * возможному диапазону значений
+     * Производит проверку {@code index} на приналдежность диапазону
+     * возможных значений индекса элемента массива.
+     *
      * @param index индекс массива
-     * @throws IndexOutOfBoundsException некорректный индекс
+     * @throws IndexOutOfBoundsException некорректный {@code index}
      */
     private void checkIndex(int index) {
         if (index < 0 || index >= size) {
@@ -279,7 +297,7 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Проверяет массив на переполнение.
+     * Проверяет {@code data} на переполнение.
      * В случае переполнения вместимость массива увеличивается
      * ({@link ArrayList_AleksandrZmeyev#increaseCapacity()}).
      */
@@ -290,8 +308,8 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     }
 
     /**
-     * Увеличивает вместимость массива в
-     * {@link ArrayList_AleksandrZmeyev#INCREASE_MULTIPLIER} раз.
+     * Увеличивает вместимость {@code data} в
+     * {@code INCREASE_MULTIPLIER} раз.
      */
     private void increaseCapacity() {
         if (data.length > Integer.MAX_VALUE / INCREASE_MULTIPLIER) {
@@ -304,9 +322,10 @@ public class ArrayList_AleksandrZmeyev<E> implements IntensiveList<E> {
     /**
      * Создает массив указанной вместимости и копирует
      * в него указанный размер данных из массива, переданного в параметре
-     * @param data массив с данными для копирования
+     *
+     * @param data       массив с данными для копирования
      * @param sizeToCopy размер массива для копирования
-     * @param capacity вместимость созданного массива
+     * @param capacity   вместимость созданного массива
      * @return ссылка на созданный массив
      * ({@link ArrayList_AleksandrZmeyev#increaseCapacity()}).
      */
