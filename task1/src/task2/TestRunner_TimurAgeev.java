@@ -18,7 +18,7 @@ public class TestRunner_TimurAgeev {
      * @param packages массив имен пакетов, в которых будет осуществлен поиск
      */
     public void run(String... packages) {
-        List<Class<?>> classes = getClasses(packages);
+        List<Class<?>> classes = findClasses(packages);
 
         for (Class<?> currentClass : classes) {
             runTests(currentClass);
@@ -63,7 +63,7 @@ public class TestRunner_TimurAgeev {
      * @param packages имя пакетов, в которых будет осуществлен поиск классов
      * @return список классов найденных в пакетах
      */
-    private List<Class<?>> getClasses(String... packages) {
+    private List<Class<?>> findClasses(String... packages) {
         if (packages == null) {
             return Collections.emptyList();
         }
