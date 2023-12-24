@@ -2,11 +2,15 @@ package org.example.services.injection;
 
 import org.example.annotation.IntensiveComponent_TimurAgeev;
 import org.example.services.factory.DependencyFactory;
+import org.example.services.factory.DependencyFactoryImpl;
 
 import java.lang.reflect.Field;
 
 public class InjectionServiceImpl implements InjectionService {
-    private DependencyFactory factory;
+    private final DependencyFactory factory = new DependencyFactoryImpl();
+
+    public InjectionServiceImpl() {
+    }
 
     public void inject(Object target) {
         Field[] fields = target.getClass().getFields();
