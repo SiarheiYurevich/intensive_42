@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Assertions_AnastasiaYaromich {
 
+
+    /**
+     * Method checks if two lists are equals.
+     */
     static <E> boolean assertEquals(IntensiveList<E> list1, IntensiveList<E> list2) {
         if((list1 == null || list2 == null) || (list1.size() != list2.size())) {
             throw  new AssertionError("List has different size");

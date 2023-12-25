@@ -11,11 +11,17 @@ public class TestRunner_AnastasiaYaromich {
 
     private final String[] packagesToScan;
 
+    /**
+     * Construct a  TestRunner_AnastasiaYaromich.
+     */
     public TestRunner_AnastasiaYaromich(String... packagesToScan) {
         this.packagesToScan = packagesToScan;
     }
 
-
+    /**
+     * Method invokes all methods which annotated like @InvensiveTest_AnastasiaYaromich
+     * using Reflection Api.
+     */
     void run() {
         if (packagesToScan == null) {
             throw new IllegalArgumentException("");
@@ -32,6 +38,9 @@ public class TestRunner_AnastasiaYaromich {
         });
     }
 
+    /**
+     * Find all methods in classes which annotated like @InvensiveTest_AnastasiaYaromich.
+     */
     private List<Method> findAnnotatedMethods(List<Class<?>> classes) {
         List<Method> methods = new ArrayList<>();
         for (Class<?> c : classes) {
@@ -44,6 +53,9 @@ public class TestRunner_AnastasiaYaromich {
         return methods;
     }
 
+    /**
+     * Find all classes in packages.
+     */
     private List<Class<?>> findClassesInPackages(String... packagesToScan) {
         ClassLoader classLoader = this.getClass().getClassLoader();
         List<Class<?>> classes = new ArrayList<>();
