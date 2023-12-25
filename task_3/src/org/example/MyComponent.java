@@ -4,13 +4,10 @@ import org.example.annotation.IntensiveComponent_TimurAgeev;
 
 @IntensiveComponent_TimurAgeev
 public class MyComponent {
-    private String message = "Hello world";
-
     public MyComponent() {
-
     }
 
-    public void printMessage() {
+    public void printMessage(String message) {
         System.out.println(message);
     }
 }

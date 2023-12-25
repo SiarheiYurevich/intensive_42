@@ -1,5 +1,10 @@
 package org.example.services.injection;
 
 public interface InjectionService {
-    void inject(Object target) ;
+    /**
+     * Осуществляет иньекцию зависимостей в переданный объект
+     *
+     * @param target - объект, в котором нужно выполнить инъекцию
+     */
+    void inject(Object target);
 }

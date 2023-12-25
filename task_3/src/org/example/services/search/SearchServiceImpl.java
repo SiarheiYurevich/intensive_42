@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 public class SearchServiceImpl implements SearchService {
     public List<Class<?>> findClasses(String packageName) {
         if (packageName == null) {
@@ -14,7 +15,7 @@ public class SearchServiceImpl implements SearchService {
         List<Class<?>> classes = new ArrayList<>();
 
         String packagePath = packageName.replace(".", "/");
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
         File packageDir = new File(classLoader.getResource(packagePath).getFile());
         File[] files = packageDir.listFiles();
