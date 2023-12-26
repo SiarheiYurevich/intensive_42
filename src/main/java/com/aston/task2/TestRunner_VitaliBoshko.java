@@ -52,9 +52,11 @@ public class TestRunner_VitaliBoshko {
     }
 
     private void findAndRunTestMethods(List<Method> methodList, Class<? extends Annotation> annotation) {
-        methodList.stream().filter(m -> m.isAnnotationPresent(annotation)).forEach(m -> {
+        methodList.stream()
+                .filter(method -> method.isAnnotationPresent(annotation))
+                .forEach(method -> {
             try {
-                m.invoke(m.getDeclaringClass().getDeclaredConstructor().newInstance());
+                method.invoke(method.getDeclaringClass().getDeclaredConstructor().newInstance());
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException |
                      NoSuchMethodException e) {
                 throw new RuntimeException(e);
@@ -68,14 +70,14 @@ public class TestRunner_VitaliBoshko {
         String path = packageName.replace('.', '/');
         Enumeration<URL> resources = classLoader.getResources(path);
 
-        List<File> dirs = new ArrayList<>();
+        List<File> directories = new ArrayList<>();
         while (resources.hasMoreElements()) {
             URL resource = (URL) resources.nextElement();
-            dirs.add(new File(resource.getFile()));
+            directories.add(new File(resource.getFile()));
         }
 
         List<Class<?>> classes = new ArrayList<>();
-        for (File directory : dirs) {
+        for (File directory : directories) {
             classes.addAll(findClasses(directory, packageName));
         }
         return classes;

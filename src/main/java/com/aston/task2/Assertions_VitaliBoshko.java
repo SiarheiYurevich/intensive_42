@@ -13,6 +13,9 @@ import java.util.Comparator;
  */
 public class Assertions_VitaliBoshko {
 
+    private Assertions_VitaliBoshko() {
+    }
+
     /**
      * The method checks assertion that two lists is equal
      *
