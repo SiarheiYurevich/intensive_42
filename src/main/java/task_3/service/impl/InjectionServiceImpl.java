@@ -1,7 +1,6 @@
 package task_3.service.impl;
 
 import task_3.context.IntensiveComponent_SlavaSles;
-import task_3.service.DependencyFinder;
 import task_3.service.InjectionService;
 
 import java.lang.reflect.Field;

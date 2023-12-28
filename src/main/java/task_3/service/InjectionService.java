@@ -1,7 +1,5 @@
 package task_3.service;
 
-import task_3.context.IntensiveComponent_SlavaSles;
-
 import java.lang.reflect.InvocationTargetException;
 
 /**

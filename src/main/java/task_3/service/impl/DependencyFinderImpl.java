@@ -84,7 +84,6 @@ public class DependencyFinderImpl implements DependencyFinder {
 
         for (Class<?> clazz : annotatedClassesFromPackage) {
 
-//            Интерфейс тоже может имплементировать нужный нам интерфейс, а тот в свою очередь иметь реализацию!
             if (!clazz.isInterface()) {
 
                 Class<?> implementation = checkImplementation(clazz, type);

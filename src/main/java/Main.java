@@ -5,8 +5,6 @@ import task_3.component.InputMessage;
 import task_3.component.subcomponent.IntensiveArrayList2_SlavaSles;
 import task_3.component.subcomponent.Vehicle;
 
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
         IntensiveContext_SlavaSles intensiveContext = new IntensiveContext_SlavaSlesImp("task_3.component");
