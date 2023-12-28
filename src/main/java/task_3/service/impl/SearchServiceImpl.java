@@ -10,6 +10,7 @@ import java.util.*;
 
 public class SearchServiceImpl implements SearchService {
 
+//    Поменять Map на Set
     @Override
     public Map<Class<?>, String> getAnnotatedClassesFromPackage(String packageName) throws IOException, ClassNotFoundException {
 
