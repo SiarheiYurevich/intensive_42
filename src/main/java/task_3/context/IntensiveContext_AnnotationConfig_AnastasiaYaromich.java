@@ -1,44 +1,9 @@
 package task_3.context;
 
-
-//
-//        Реализовать класс IntensiveContext_NameSurname - "аналог" Spring контекста. +
-//
-//        - коструктур данного класса должен принимать пакет для поиска классов,
-//        аннотированных @IntensiveComponent_NameSurname (предварительно создать
-//        аннотацию @IntensiveComponent_NameSurname).
-//
-//        - класс должен иметь единственный публичный метод:
-//public <T> T getObject(Class<T> type);
-//
-//        - после создания класса IntensiveContext_NameSurname мы должны иметь возможность
-//        с помощью метода getObject получить любой класс, имеющий аннотацию
-//@IntensiveComponent_NameSurname, и находящийся в переданном пакете.
-//        - если запрашиваем интерфейс - получаем реализацию, если нет реализации или
-//        интерфейс имеет больше одной реализации - эксепшен.
-//
-//        - классы, аннотированные @IntensiveComponent_NameSurname, не должны создаваться
-//        и добавляться в IntensiveContext_NameSurname вместе с его созданием, а только
-//        при вызове метода getObject.
-//        - если класс аннотированнй @IntensiveComponent_NameSurname имеет поля, которые
-//        также являются классами, аннотированными данной аннотацией, они должны быть
-//        также проинициализированны.
-//
-//        - логику поиска и создания классов выносить по специализированным классам,
-//        например SearchService, InjectionService, DependencyFactory и т.п.,
-//        классы должны иметь интерфейсы и реализацию (все по SOLID).
-//
-//        - в методе main класса продемострировать работу класса IntensiveContext_NameSurname,
-//        например:
-//        IntensiveContext_NameSurname context = new IntensiveContext_NameSurname("пакет");
-//        SomeClass1 class1 = context.getObject(SomeClass1.class);
-//        class1.run(); // должен, например, вывести сообщение в консоль
-
 import task_3.annotations.IntensiveSingletonScope_AnastasiaYaromich;
 import task_3.objectfactory.IntensiveFactory_AnnotationConfig_AnastasiaYaromich;
 import task_3.scanner.ClassPathObjectScanner;
 import task_3.scanner.ClassPathObjectScannerImpl;
-
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
