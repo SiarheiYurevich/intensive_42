@@ -1,6 +1,7 @@
 package task_3.service.impl;
 
-import task_3.IntensiveComponent_SlavaSles;
+import task_3.context.IntensiveComponent_SlavaSles;
+import task_3.context.IntensiveContext_SlavaSles;
 import task_3.service.SearchService;
 
 import java.io.File;
@@ -9,8 +10,26 @@ import java.net.URL;
 
 import java.util.*;
 
+/**
+ * Класс, реализующий интерфейс {@link SearchService}.
+ * @author Slava Sles
+ * @version 1.0
+ */
 public class SearchServiceImpl implements SearchService {
 
+    /**
+     * Пустой конструктор класса.
+     */
+    public SearchServiceImpl() {
+    }
+
+    /**
+     * Метод, возвращающий набор классов, аннотированных {@link IntensiveComponent_SlavaSles}.
+     * @param packageName название пакета, в котором находятся классы, помеченные аннотацией
+     * @return набор классов из пакета {@code packageName}, аннотированных {@link IntensiveComponent_SlavaSles}
+     * @throws IOException если не удается получить доступ к пакету {@code packageName}
+     * @throws ClassNotFoundException если не удается найти нужный файл в пакете {@code packageName}
+     */
     @Override
     public Set<Class<?>> getAnnotatedClassesFromPackage(String packageName) throws IOException, ClassNotFoundException {
 

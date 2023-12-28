@@ -1,6 +1,7 @@
 package task_3.service.impl;
 
-import task_3.IntensiveComponent_SlavaSles;
+import task_3.context.IntensiveComponent_SlavaSles;
+import task_3.context.IntensiveContext_SlavaSles;
 import task_3.exception.NoSuchImplementationException;
 import task_3.exception.NoUniqueImplementationException;
 import task_3.service.DependencyFinder;
@@ -11,14 +12,40 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Класс, реализующий интерфейс {@link DependencyFinder}.
+ * @author Slava Sles
+ * @version 1.0
+ */
 public class DependencyFinderImpl implements DependencyFinder {
     Map<Class<?>, Set<Class<?>>> dependenciesForClass = new LinkedHashMap<>();
     Set<Class<?>> annotatedClassesFromPackage;
 
+    /**
+     * Конструктор класса.
+     * @param annotatedClassesFromPackage набор всех классов с аннотацией {@link IntensiveContext_SlavaSles}
+     */
     public DependencyFinderImpl(Set<Class<?>> annotatedClassesFromPackage) {
         this.annotatedClassesFromPackage = annotatedClassesFromPackage;
     }
 
+    /**
+     * Метод, возвращающий Map со всеми зависимостями для запрашиваемого класса.
+     * <p>
+     *     Если запрашиваемый класс {@code type} является интерфейсом, то для него ищется имплементация среди классов
+     *     из списка {@code annotatedClassesFromPackage}. В случае, если имплементации интерфейса не найдено, то
+     *     выбрасывается исключение {@code NoSuchImplementationException}. В случае, если найдено более одной
+     *     имплементации, то выбрасывается исключение {@code NoUniqueImplementationException}.
+     *     После этого проверяются все поля запрашиваемого класса на наличие в них классов, также аннотированных
+     *     {@link IntensiveComponent_SlavaSles}. Данные классы добавляются в набор значений для Map
+     *     {@code dependenciesForClass}. Еслу у проверяемого класса найдена хотя бы одна дополнительная зависимость, то
+     *     метод {@link DependencyFinderImpl#findDependencies(Class)} вызывается рекурсивно для каждой такой
+     *     зависимости из полей класса.
+     * </p>
+     * @param type класс (тип) запрашиваемого объекта
+     * @return Map с парами ключ - класс, значение - список полей классов (зависимостей), аннотированных
+     * {@link IntensiveContext_SlavaSles}
+     */
     public Map<Class<?>, Set<Class<?>>> findDependencies(Class<?> type) {
 
         Class<?> requiredClass = type;

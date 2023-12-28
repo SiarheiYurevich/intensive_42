@@ -1,9 +1,12 @@
 package task_3.component;
 
-import task_3.IntensiveComponent_SlavaSles;
+import task_3.context.IntensiveComponent_SlavaSles;
 
 import java.util.Scanner;
 
+/**
+ * Тестовый класс для проверки работы приложения
+ */
 @IntensiveComponent_SlavaSles
 public class InputMessage {
     String message = "";

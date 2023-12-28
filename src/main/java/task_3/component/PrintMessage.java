@@ -1,7 +1,10 @@
 package task_3.component;
 
-import task_3.IntensiveComponent_SlavaSles;
+import task_3.context.IntensiveComponent_SlavaSles;
 
+/**
+ * Тестовый класс для проверки работы приложения
+ */
 @IntensiveComponent_SlavaSles
 public class PrintMessage {
     String message;

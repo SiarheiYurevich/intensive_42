@@ -1,6 +1,7 @@
 package task_3.service.impl;
 
-import task_3.IntensiveComponent_SlavaSles;
+import task_3.context.IntensiveComponent_SlavaSles;
+import task_3.service.DependencyFinder;
 import task_3.service.InjectionService;
 
 import java.lang.reflect.Field;
@@ -8,17 +9,41 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Класс, реализующий интерфейс {@link InjectionService}.
+ * @author Slava Sles
+ * @version 1.0
+ */
 public class InjectionServiceImpl implements InjectionService {
 
     private final Map<Class<?>, Set<Class<?>>> dependenciesForClass;
     private final Map<Class<?>, Object> intensiveContext;
 
+    /**
+     * Конструктор класса с параметрами.
+     * @param dependenciesForClass перечень зависимостей запрашиваемого объекта
+     * @param intensiveContext контекст приложения, в котором содержатся экземпляры объектов классов, аннотированных
+     * {@link IntensiveComponent_SlavaSles}
+     */
     public InjectionServiceImpl(Map<Class<?>, Set<Class<?>>> dependenciesForClass, Map<Class<?>,
             Object> intensiveContext) {
         this.dependenciesForClass = dependenciesForClass;
         this.intensiveContext = intensiveContext;
     }
 
+    /**
+     * Метод, создающий экземпляры классов и внедряющий в них зависимости.
+     * <p>
+     *     Метод выполняется до тех, пока количество экземпляров объектов в контексте приложения
+     *     {@code intensiveContext} не станет равным количеству классов из перечня зависимостей
+     *     {@code dependenciesForClass}.
+     *     В методе последовательно создаются и внедряются объекты в зависимые от них классы в обратном порядке.
+     * </p>
+     * @throws InvocationTargetException выбрасывается при возникновении ошибки вызова метода/конструктора у класса
+     * @throws NoSuchMethodException выбрасывается при отсутствии запрашиваемого метода у класса
+     * @throws InstantiationException выбрасывается при возникновении ошибки при создании экземпляра класса
+     * @throws IllegalAccessException выбрасывается при возникновении ошибки получения доступа к классу
+     */
     @Override
     public void injectDependencies() throws InvocationTargetException, NoSuchMethodException, InstantiationException,
             IllegalAccessException {
