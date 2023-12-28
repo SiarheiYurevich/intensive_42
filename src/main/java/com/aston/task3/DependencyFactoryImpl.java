@@ -15,7 +15,7 @@ import static java.util.Objects.isNull;
  */
 public class DependencyFactoryImpl implements DependencyFactory {
     private final Map<String, Object> objectFactory = new HashMap<>();
-    private final InjectionServiceImpl injectionService = new InjectionServiceImpl();
+    private final InjectionService injectionService = new InjectionServiceImpl();
 
     /**
      * This method creates objects of specified type if it or implementation contains in list {@code classes}.
