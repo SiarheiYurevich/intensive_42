@@ -11,6 +11,8 @@ public class IntensiveContextImpl_StanislavFedin implements IntensiveContext_Sta
 
     private Map<String, Class> annotatedClasses = new HashMap<>();
 
+    // todo нужна мапа с инстансами, чтобы их выдавать в getObject()
+
     public IntensiveContextImpl_StanislavFedin(String packageName) {
         ScanPackageService scanner = new ScanPackageServiceImpl();
 

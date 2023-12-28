@@ -8,15 +8,13 @@ public class SearchClassServiceImpl  implements SearchClassService{
     @Override
     public <T> Class<T> getImplClass(Class<T> interfaceClass, Map<String, Class> annotatedClasses) {
         AtomicReference<Class<? extends T>> implClass = new AtomicReference<>();
-        AtomicInteger counter = new AtomicInteger(-1);
+        AtomicInteger counter = new AtomicInteger(0);
 
         annotatedClasses.entrySet()
                 .forEach(key -> {
                     if (interfaceClass.isAssignableFrom(key.getValue())) {
                         counter.getAndIncrement();
-
-                        if (!key.getValue().isInterface())
-                            implClass.set(key.getValue());
+                        implClass.set(key.getValue());
                     }
                 });
 
