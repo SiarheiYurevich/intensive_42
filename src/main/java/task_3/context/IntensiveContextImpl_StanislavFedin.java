@@ -9,9 +9,9 @@ public class IntensiveContextImpl_StanislavFedin implements IntensiveContext_Sta
     private final SearchClassService searchClassService = new SearchClassServiceImpl();
     private final InjectionService injectionService = new InjectionServiceImpl();
 
-    private Map<String, Class> annotatedClasses = new HashMap<>();
-
-    // todo нужна мапа с инстансами, чтобы их выдавать в getObject()
+    private final Map<String, Class> annotatedClasses = new HashMap<>();
+    
+    private final Map<String, Object> instanceOfObject = new HashMap<>();
 
     public IntensiveContextImpl_StanislavFedin(String packageName) {
         ScanPackageService scanner = new ScanPackageServiceImpl();
@@ -21,7 +21,18 @@ public class IntensiveContextImpl_StanislavFedin implements IntensiveContext_Sta
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T getObject(Class<T> type) throws Exception {
+        
+        if (type.isInterface()) {
+            for (Object value : instanceOfObject.values()) {
+                if (value.getClass().isAssignableFrom(type))
+                    return (T) value;
+            }
+        }
+        
+        if (instanceOfObject.containsKey(type.getSimpleName()))
+            return (T) instanceOfObject.get(type.getSimpleName());
 
         return createObject(type);
     }
@@ -36,6 +47,8 @@ public class IntensiveContextImpl_StanislavFedin implements IntensiveContext_Sta
         T t = implClass.getConstructor().newInstance();
 
         injectionService.inject(t, annotatedClasses);
+        
+        instanceOfObject.put(t.getClass().getSimpleName(), t);
 
         return t;
     }
