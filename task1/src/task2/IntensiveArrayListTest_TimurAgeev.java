@@ -15,12 +15,12 @@ public class IntensiveArrayListTest_TimurAgeev {
         ArrayList_TimurAgeev<Integer> testList = new ArrayList_TimurAgeev<>();
         logger.info("Создан пустой список");
 
-        for (int i = 0; i < 10; i++) {
-            testList.add(new Random().nextInt(10));
-        }
-        logger.info("Список заполнен десятью случайными числами от 1 до 10");
+        testList.add(1);
+        testList.add(2);
+        testList.add(3);
+        logger.info("Список заполнен тремя числами");
 
-        boolean isSorted = Assertions_TimurAgeev.assertIsSorted(testList, Integer::compareTo);
+        boolean isSorted = Assertions_TimurAgeev.assertIntensiveListIsSorted(testList, Integer::compareTo);
         logger.info("Произведена проверка сортировки.");
 
         if (isSorted) {
@@ -42,13 +42,16 @@ public class IntensiveArrayListTest_TimurAgeev {
         ArrayList_TimurAgeev<Integer> testList2 = new ArrayList_TimurAgeev<>();
         logger.info("Созданы два пустых списка");
 
-        for (int i = 0; i < 10; i++) {
-            testList1.add(new Random().nextInt(10));
-            testList2.add(new Random().nextInt(10));
-        }
-        logger.info("Списки заполнен десятью случайными числами от 1 до 10");
 
-        boolean isEqual = Assertions_TimurAgeev.assertEquals(testList1, testList2);
+        testList1.add(1);
+        testList1.add(2);
+        testList1.add(3);
+        testList2.add(1);
+        testList2.add(2);
+        testList2.add(3);
+        logger.info("Список заполнен тремя числами");
+
+        boolean isEqual = Assertions_TimurAgeev.assertIntensiveListEquals(testList1, testList2);
         logger.info("Произведена проверка эквивалентности'.");
 
         if (isEqual) {

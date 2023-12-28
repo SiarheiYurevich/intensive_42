@@ -64,10 +64,6 @@ public class TestRunner_TimurAgeev {
      * @return список классов найденных в пакетах
      */
     private List<Class<?>> findClasses(String... packages) {
-        if (packages == null) {
-            return Collections.emptyList();
-        }
-
         List<Class<?>> classes = new ArrayList<>();
 
         for (String packageName : packages) {
@@ -88,11 +84,11 @@ public class TestRunner_TimurAgeev {
      * @return список классов найденных в пакете
      */
     private List<Class<?>> findClassesInPackage(String packageName) {
-        if (packageName == null) {
-            return Collections.emptyList();
-        }
-
         List<Class<?>> classes = new ArrayList<>();
+
+        if (packageName == null) {
+            return classes;
+        }
 
         String packagePath = packageName.replace(".", "/");
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();

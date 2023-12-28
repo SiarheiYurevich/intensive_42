@@ -12,13 +12,13 @@ public class Assertions_TimurAgeev<E> {
      * @param list2 второй список для сравнения
      * @return true, если списки эквивалентны, иначе - false
      */
-    public static <E> boolean assertEquals(IntensiveList<E> list1, IntensiveList<E> list2) {
-        if (list1.size() != list2.size()) {
+    public static <E> boolean assertIntensiveListEquals(IntensiveList<E> list1, IntensiveList<E> list2) {
+        if (list1 == null || list2 == null || list1.size() != list2.size()) {
             return false;
         }
 
         for (int i = 0; i < list1.size(); i++) {
-            if (!list1.get(i).equals(list2.get(i))) {
+            if (list1.get(i) != null || list2.get(i) != null || !list1.get(i).equals(list2.get(i))) {
                 return false;
             }
         }
@@ -33,7 +33,7 @@ public class Assertions_TimurAgeev<E> {
      * @param comparator компаратор, по которому происходит сравнение элементов списка
      * @return true, если список отсортрован, иначе - false
      */
-    public static <E> boolean assertIsSorted(IntensiveList<E> list, Comparator<E> comparator) {
+    public static <E> boolean assertIntensiveListIsSorted(IntensiveList<E> list, Comparator<E> comparator) {
         return list.isSorted(comparator);
     }
 }

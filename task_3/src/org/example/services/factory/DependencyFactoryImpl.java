@@ -15,6 +15,8 @@ public class DependencyFactoryImpl implements DependencyFactory {
             throw new RuntimeException("Конструктор или метод создаваемого класса выбросил исключение: " + e);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Не найден метод или конструктор вызываемого класса");
+        } catch (NullPointerException e){
+            throw new NullPointerException("clazz не может быть null");
         }
     }
 }

@@ -2,17 +2,16 @@ package org.example.services.search;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
 public class SearchServiceImpl implements SearchService {
     public List<Class<?>> findClasses(String packageName) {
-        if (packageName == null) {
-            return Collections.emptyList();
-        }
-
         List<Class<?>> classes = new ArrayList<>();
+
+        if (packageName == null) {
+            return classes;
+        }
 
         String packagePath = packageName.replace(".", "/");
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();

@@ -9,21 +9,18 @@ import java.lang.reflect.Field;
 public class InjectionServiceImpl implements InjectionService {
     private final DependencyFactory factory = new DependencyFactoryImpl();
 
-    public InjectionServiceImpl() {
-    }
-
     public void inject(Object target) {
-        Field[] fields = target.getClass().getFields();
+        Field[] fields = target.getClass().getDeclaredFields();
 
         for (Field field : fields) {
             if (field.isAnnotationPresent(IntensiveComponent_TimurAgeev.class)) {
                 field.setAccessible(true);
+                Object dependency = factory.createInstance(field.getType());
 
-                Object dependency = factory.createInstance(field.getDeclaringClass());
                 try {
                     field.set(target, dependency);
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
+                } catch (IllegalAccessException | IllegalArgumentException e) {
+                    throw new RuntimeException("Невозможно установить значение в  " + field.getName());
                 }
             }
         }
