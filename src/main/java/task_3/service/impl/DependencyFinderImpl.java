@@ -3,7 +3,7 @@ package task_3.service.impl;
 import task_3.IntensiveComponent_SlavaSles;
 import task_3.exception.NoSuchImplementationException;
 import task_3.exception.NoUniqueImplementationException;
-import task_3.service.DepedencyFinder;
+import task_3.service.DependencyFinder;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
@@ -11,11 +11,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class DependencyFinderImpl implements DepedencyFinder {
+public class DependencyFinderImpl implements DependencyFinder {
     Map<Class<?>, Set<Class<?>>> dependenciesForClass = new LinkedHashMap<>();
-    Map<Class<?>, String> annotatedClassesFromPackage;
+    Set<Class<?>> annotatedClassesFromPackage;
 
-    public DependencyFinderImpl(Map<Class<?>, String> annotatedClassesFromPackage) {
+    public DependencyFinderImpl(Set<Class<?>> annotatedClassesFromPackage) {
         this.annotatedClassesFromPackage = annotatedClassesFromPackage;
     }
 
@@ -23,9 +23,11 @@ public class DependencyFinderImpl implements DepedencyFinder {
 
         Class<?> requiredClass = type;
         Set<Class<?>> dependenciesSet = new HashSet<>();
+
         if (type.isInterface()) {
             requiredClass = getImplementation(type);
         }
+
         Field[] fields = requiredClass.getDeclaredFields();
 
         dependenciesForClass.put(requiredClass, dependenciesSet);
@@ -53,7 +55,7 @@ public class DependencyFinderImpl implements DepedencyFinder {
 
         Class<?> implementationClass = null;
 
-        for (Class<?> clazz : annotatedClassesFromPackage.keySet()) {
+        for (Class<?> clazz : annotatedClassesFromPackage) {
 
 //            Интерфейс тоже может имплементировать нужный нам интерфейс, а тот в свою очередь иметь реализацию!
             if (!clazz.isInterface()) {

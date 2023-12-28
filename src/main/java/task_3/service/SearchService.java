@@ -1,8 +1,8 @@
 package task_3.service;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.Set;
 
 public interface SearchService {
-    Map<Class<?>, String> getAnnotatedClassesFromPackage(String packageName) throws IOException, ClassNotFoundException;
+    Set<Class<?>> getAnnotatedClassesFromPackage(String packageName) throws IOException, ClassNotFoundException;
 }

@@ -6,15 +6,15 @@ import task_3.service.SearchService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
 import java.util.*;
 
 public class SearchServiceImpl implements SearchService {
 
-//    Поменять Map на Set
     @Override
-    public Map<Class<?>, String> getAnnotatedClassesFromPackage(String packageName) throws IOException, ClassNotFoundException {
+    public Set<Class<?>> getAnnotatedClassesFromPackage(String packageName) throws IOException, ClassNotFoundException {
 
-        Map<Class<?>, String> annotatedClassesFromPackage = new HashMap<>();
+        Set<Class<?>> annotatedClassesFromPackage = new HashSet<>();
 
         if (packageName == null) {
             return annotatedClassesFromPackage;
@@ -29,7 +29,7 @@ public class SearchServiceImpl implements SearchService {
         List<File> files = getFiles(resources);
 
         for (File file : files) {
-            annotatedClassesFromPackage.putAll(findClasses(file, packageName));
+            annotatedClassesFromPackage.addAll(findClasses(file, packageName));
         }
 
         return annotatedClassesFromPackage;
@@ -48,8 +48,8 @@ public class SearchServiceImpl implements SearchService {
         return files;
     }
 
-    private Map<Class<?>, String> findClasses(File file, String packageName) throws ClassNotFoundException {
-        Map<Class<?>, String> annotatedClassesFromDirectory = new HashMap<>();
+    private Set<Class<?>> findClasses(File file, String packageName) throws ClassNotFoundException {
+        Set<Class<?>> annotatedClassesFromDirectory = new HashSet<>();
 
         File[] subFiles = file.listFiles();
 
@@ -64,21 +64,21 @@ public class SearchServiceImpl implements SearchService {
                         subFile.getName().substring(0, subFile.getName().lastIndexOf('.'));
                 Class<?> clazz = Class.forName(className);
 
-                addAnnotatedClassToMap(annotatedClassesFromDirectory, clazz, packageName);
+                addAnnotatedClassToSet(annotatedClassesFromDirectory, clazz);
 
             } else {
                 String subPackageName = packageName + "." + subFile.getName();
-                annotatedClassesFromDirectory.putAll(findClasses(subFile, subPackageName));
+                annotatedClassesFromDirectory.addAll(findClasses(subFile, subPackageName));
             }
 
         }
         return annotatedClassesFromDirectory;
     }
 
-    private void addAnnotatedClassToMap(Map<Class<?>, String> annotatedClassesFromDirectory,
-                                        Class<?> clazz, String packageName) {
+    private void addAnnotatedClassToSet(Set<Class<?>> annotatedClassesFromDirectory,
+                                        Class<?> clazz) {
         if (clazz.isAnnotationPresent(IntensiveComponent_SlavaSles.class)) {
-            annotatedClassesFromDirectory.put(clazz, packageName);
+            annotatedClassesFromDirectory.add(clazz);
         }
     }
 }
