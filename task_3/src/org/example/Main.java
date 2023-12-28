@@ -2,8 +2,6 @@ package org.example;
 
 import org.example.context.IntensiveContext_TimurAgeev;
 import org.example.context.IntensiveContext_TimurAgeevImpl;
-import org.example.services.component.AnotherComponent;
-import org.example.services.component.MyComponent;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,6 +10,7 @@ public class Main {
         AnotherComponent anotherComponent = context.getObject(AnotherComponent.class);
 
         myComponent.printMessage("Hello world!");
-        anotherComponent.doMyComponentAction("Fuck yeah");
+        MyComponent myComponent1 = anotherComponent.getMyComponent();
+        myComponent1.printMessage("Fuck yeah");
     }
 }

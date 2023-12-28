@@ -1,4 +1,4 @@
-package org.example.services.component;
+package org.example;
 
 import org.example.annotation.IntensiveComponent_TimurAgeev;
 
