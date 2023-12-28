@@ -9,7 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Dependency injection service that scans for the presence of an annotation {@link InjectComponent_StanislavFedin}
+ * and further initializes the dependency and injection into the passed object.
+ * @author Stanislav Fedin
+ */
 public class InjectionServiceImpl implements InjectionService {
+
+    /**
+     * Searches for annotated fields in the passed object
+     * for further initialization of entities and their implementation in the current object.
+     * @param object Instance into which dependencies are injected
+     * @param annotatedClasses List of annotated classes
+     * @throws InvocationTargetException Cannot set dependency via setter on object
+     * @throws IllegalAccessException Unable to access setter
+     */
     @Override
     public void inject(Object object, Map<String, Class> annotatedClasses) {
         Class<?> currentClass = object.getClass();

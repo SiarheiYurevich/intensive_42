@@ -9,11 +9,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Implementation of a service for scanning packets marked with an annotation {@link IntensiveComponent_StanislavFedin}
+ * @author Stanislav Fedin
+ */
 public class ScanPackageServiceImpl implements ScanPackageService {
     private static final char PKG_SEPARATOR = '.';
     private static final String CLASS_FILE_SUFFIX = ".class";
     private static final String PATH_TO_PACKAGE = "src.main.java.task_3.";
 
+    /**
+     * Searches through ClassLoader for all classes marked with an annotation {@link IntensiveComponent_StanislavFedin}
+     * @param packageToScan Name of the package in which scanning will be performed
+     * @return List of found classes
+     */
     @Override
     public List<Class> getAnnotatedClasses(String packageToScan) {
         List<Class> classes = new ArrayList<>();
